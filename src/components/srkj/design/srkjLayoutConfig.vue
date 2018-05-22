@@ -152,16 +152,24 @@ export default {
   watch: {
     // 当前组件变化时，获取store中当前组件的属性，对从store中取出的属性进行clone，使layoutModel和store中的属性不是同一个引用
     time: function() {
-      this.layoutModel = deepCopy(
-        this.componentsAttributes[this.params.componentId]
-      )
+      if (this.componentsAttributes[this.params.componentId]) {
+        this.layoutModel = deepCopy(
+          this.componentsAttributes[this.params.componentId]
+        )
+      } else {
+        this.layoutModel = { row: {}}
+      }
     }
   },
   created() {
     // 初始化按钮配置时，对从store中取出的属性进行clone，使buttonConfigModel和store中的属性不是同一个引用
-    this.layoutModel = deepCopy(
-      this.componentsAttributes[this.params.componentId]
-    )
+    if (this.componentsAttributes[this.params.componentId]) {
+      this.layoutModel = deepCopy(
+        this.componentsAttributes[this.params.componentId]
+      )
+    } else {
+      this.layoutModel = { row: {}}
+    }
   },
   mounted() {
     // 注册保存组件和删除组件事件

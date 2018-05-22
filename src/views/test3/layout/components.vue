@@ -28,7 +28,6 @@ export default {
       if (ev.target.id === 'a') {
         attributes = {
           row: {
-            gutter: 0
           },
           cols: [
             {
