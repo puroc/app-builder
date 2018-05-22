@@ -1,6 +1,6 @@
 <template>
   <div draggable="true" :data-component-id="params.componentId" @click.stop="openAttributesPanel">
-    <el-table border stripe highlight-current-row :data="datas" tooltip-effect="dark" style="width: 100%" max-height="600" @selection-change="handleSelectionChange">
+    <el-table :defaultSort="attributes.defaultSort" :highlightCurrentRow="attributes.highlightCurrentRow" :showHeader="attributes.showHeader" :fit="attributes.fit" :border="attributes.border" :height="attributes.height" :maxHeight="attributes.maxHeight" :size="attributes.size" :stripe="attributes.stripe" :data="datas" tooltip-effect="dark" style="width: 100%" @selection-change="handleSelectionChange">
       <el-table-column :prop="col.prop" :label="col.label" v-for="col in attributes.cols" :key="col.prop"></el-table-column>
     </el-table>
   </div>
