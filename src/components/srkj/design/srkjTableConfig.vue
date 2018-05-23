@@ -33,11 +33,11 @@
     </el-form>
     <el-row>
       <el-col :span=8 :offset=8>
-        <el-button type="primary" plain @click="openColConfigPanel">表格列属性配置</el-button>
+        <el-button type="primary" plain @click="openColConfigPanel">列属性配置</el-button>
       </el-col>
     </el-row>
-    <el-dialog title="表格列属性配置" :visible.sync="colDialogVisible" top="5vh">
-      <el-form :label-position="labelPosition" label-width="160px" size='small' :model="model">
+    <el-dialog title="列属性配置" :visible.sync="colDialogVisible" top="5vh">
+      <el-form :label-position="labelPosition" label-width="80px" size='small' :model="model">
         <el-tabs v-model="editableTabsValue" type="card" editable @edit="handleTabsEdit">
           <el-tab-pane :key="col.id" v-for="(col, index) in model.cols" :label="col.id" :name="col.id">
             <el-row>
@@ -45,10 +45,40 @@
                 <el-form-item label="标题">
                   <el-input v-model="col.label" placeholder=""></el-input>
                 </el-form-item>
+                <el-form-item label="类型">
+                  <el-select v-model="col.type" placeholder="请选择">
+                    <el-option v-for="item in colTypeOptions" :key="item.value" :label="item.label" :value="item.value">
+                    </el-option>
+                  </el-select>
+                </el-form-item>
+                <el-form-item label="宽度">
+                  <el-input v-model="col.width" placeholder=""></el-input>
+                </el-form-item>
+                <el-form-item label="最小宽度">
+                  <el-input v-model="col.minWidth" placeholder=""></el-input>
+                </el-form-item>
               </el-col>
               <el-col :span=12>
                 <el-form-item label="字段名">
                   <el-input v-model="col.prop" placeholder=""></el-input>
+                </el-form-item>
+                <el-form-item label="固定方位">
+                  <el-select v-model="col.fixed" placeholder="请选择">
+                    <el-option v-for="item in fixedOptions" :key="item.value" :label="item.label" :value="item.value">
+                    </el-option>
+                  </el-select>
+                </el-form-item>
+                <el-form-item label="过长隐藏">
+                  <el-select v-model="col.showOverflowTooltip" placeholder="请选择">
+                    <el-option v-for="item in showOverflowTooltipOptions" :key="item.value" :label="item.label" :value="item.value">
+                    </el-option>
+                  </el-select>
+                </el-form-item>
+                <el-form-item label="对齐方式">
+                  <el-select v-model="col.align" placeholder="请选择">
+                    <el-option v-for="item in alignOptions" :key="item.value" :label="item.label" :value="item.value">
+                    </el-option>
+                  </el-select>
                 </el-form-item>
               </el-col>
             </el-row>
@@ -87,6 +117,54 @@ export default {
         {
           value: 'mini',
           label: 'mini'
+        }
+      ],
+      colTypeOptions: [
+        {
+          value: 'selection',
+          label: 'selection'
+        },
+        {
+          value: 'index',
+          label: 'index'
+        },
+        {
+          value: 'expand',
+          label: 'expand'
+        }
+      ],
+      fixedOptions: [
+        {
+          value: 'left',
+          label: 'left'
+        },
+        {
+          value: 'right',
+          label: 'right'
+        }
+      ],
+      showOverflowTooltipOptions: [
+        {
+          value: 'true',
+          label: 'true'
+        },
+        {
+          value: 'false',
+          label: 'false'
+        }
+      ],
+      alignOptions: [
+        {
+          value: 'left',
+          label: 'left'
+        },
+        {
+          value: 'center',
+          label: 'center'
+        },
+        {
+          value: 'right',
+          label: 'right'
         }
       ]
     }
@@ -200,6 +278,12 @@ export default {
   }
 }
 </script>
+<style scoped>
+.el-select{
+  width: 100%
+}
+</style>
+
 
 
 
