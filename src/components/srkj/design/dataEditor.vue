@@ -58,9 +58,10 @@ export default {
     // 保存当前组件设置的数据
     save() {
       const component = { componentId: this.currentComponent.componentId }
-      // component.datas = JSON.parse(deepCopy(this.model.datas))
-      component.datas = JSON.parse(this.model.datas)
-      this.$store.dispatch('setComponentDatas', component)
+      if (this.model.datas) {
+        component.datas = JSON.parse(this.model.datas)
+        this.$store.dispatch('setComponentDatas', component)
+      }
     },
     getDatas() {
       // 从store中获取当前组件的数据，若获取到则对model赋值，若没有获取到则重置model的所有属性值为初始值
