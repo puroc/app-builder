@@ -5,36 +5,50 @@ const builder = {
     time: {},
     currentComponent: '',
     componentsParams: {},
-    // params: {
+    // componentsParams: {
     //   componentId: {
     //     name: 'abc'
     //   }
     // },
     componentsAttributes: {},
-    // attributes: {
+    // componentsAttributes: {
     //   componentId: {
     //     name: 'abc'
     //   }
     // },
     componentsLayouts: {},
-    // components: {
+    // componentsLayouts: {
     //   layout1: {
     //     col1: [{ component: '1' }],
     //     col2: [{ component: '2' }]
     //   }
     // }
     componentsStyles: {},
-    // components: {
+    // componentsStyles: {
     //   componentId: {
     //     buttonStyle1: 'color:red;font-size:20px',
     //     buttonStyle2: 'color:blue;font-size:5px',
     //   }
     // }
-    componentsDatas: {}
-    // components: {
+    componentsDatas: {},
+    // componentsDatas: {
     //   componentId: {
     //     data1: '',
     //     data2: '',
+    //   }
+    // }
+    componentsEvents: {},
+    // componentsEvents: {
+    //   componentId: {
+    //     event1: '',
+    //     event2: '',
+    //   }
+    // }
+    componentsCodes: {}
+    // componentsCodes: {
+    //   componentId: {
+    //     code1: '',
+    //     code2: '',
     //   }
     // }
   },
