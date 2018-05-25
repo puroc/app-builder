@@ -142,6 +142,14 @@ const builder = {
     DELETE_COMPONENT_DATAS: (state, componentId) => {
       delete state.componentsDatas[componentId]
     },
+    // 删除该组件的事件数据
+    DELETE_COMPONENT_EVENTS: (state, componentId) => {
+      delete state.componentsEvents[componentId]
+    },
+    // 删除该组件的代码数据
+    DELETE_COMPONENT_CODES: (state, componentId) => {
+      delete state.componentsCodes[componentId]
+    },
     UPDATE_TIME: state => {
       state.time = getCurrentTime()
     },
@@ -153,6 +161,12 @@ const builder = {
     },
     SET_COMPONENT_DATAS: (state, component) => {
       state.componentsDatas[component.componentId] = component.datas
+    },
+    SET_COMPONENT_EVENTS: (state, component) => {
+      state.componentsEvents[component.componentId] = component.events
+    },
+    SET_COMPONENT_CODES: (state, component) => {
+      state.componentsCodes[component.componentId] = component.codes
     }
   },
   actions: {
@@ -176,6 +190,8 @@ const builder = {
         commit('DELETE_COMPONENT_PARAMS', componentId)
         commit('DELETE_COMPONENT_STYLES', componentId)
         commit('DELETE_COMPONENT_DATAS', componentId)
+        commit('DELETE_COMPONENT_EVENTS', componentId)
+        commit('DELETE_COMPONENT_CODES', componentId)
       })
       // 删除组件时，更新state.time，以便布局组件watch，及时更新布局中的组件
       commit('UPDATE_TIME')
@@ -199,6 +215,12 @@ const builder = {
     },
     setComponentDatas: ({ commit }, component) => {
       commit('SET_COMPONENT_DATAS', component)
+    },
+    setComponentEvents: ({ commit }, component) => {
+      commit('SET_COMPONENT_EVENTS', component)
+    },
+    setComponentCodes: ({ commit }, component) => {
+      commit('SET_COMPONENT_CODES', component)
     }
   }
 }

@@ -13,6 +13,8 @@ const getters = {
   componentsAttributes: state => state.builder.componentsAttributes,
   componentsStyles: state => state.builder.componentsStyles,
   componentsDatas: state => state.builder.componentsDatas,
+  componentsEvents: state => state.builder.componentsEvents,
+  componentsCodes: state => state.builder.componentsCodes,
   currentComponent: state => state.builder.currentComponent,
   time: state => state.builder.time
 
