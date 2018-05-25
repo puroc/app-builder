@@ -30,6 +30,7 @@ export default {
       getBus().$emit(this.currentComponent.componentId + '-param-save', '')
       getBus().$emit(this.currentComponent.componentId + '-attribute-save', '')
       getBus().$emit(this.currentComponent.componentId + '-style-save', '')
+      getBus().$emit(this.currentComponent.componentId + '-data-save', '')
     },
     deleteComponent() {
       getBus().$emit(this.currentComponent.componentId + '-component-delete', '')

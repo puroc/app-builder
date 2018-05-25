@@ -27,9 +27,6 @@
       <el-form-item label="高亮">
         <el-checkbox v-model="model.highlightCurrentRow"></el-checkbox>
       </el-form-item>
-      <el-form-item label="排序列">
-        <el-checkbox v-model="model.defaultSort"></el-checkbox>
-      </el-form-item>
     </el-form>
     <el-row>
       <el-col :span=8 :offset=8>
@@ -69,10 +66,7 @@
                   </el-select>
                 </el-form-item>
                 <el-form-item label="过长隐藏">
-                  <el-select v-model="col.showOverflowTooltip" placeholder="请选择">
-                    <el-option v-for="item in showOverflowTooltipOptions" :key="item.value" :label="item.label" :value="item.value">
-                    </el-option>
-                  </el-select>
+                  <el-checkbox v-model="col.showOverflowTooltip"></el-checkbox>
                 </el-form-item>
                 <el-form-item label="对齐方式">
                   <el-select v-model="col.align" placeholder="请选择">
@@ -141,16 +135,6 @@ export default {
         {
           value: 'right',
           label: 'right'
-        }
-      ],
-      showOverflowTooltipOptions: [
-        {
-          value: 'true',
-          label: 'true'
-        },
-        {
-          value: 'false',
-          label: 'false'
         }
       ],
       alignOptions: [

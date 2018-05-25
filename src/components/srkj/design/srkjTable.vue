@@ -1,7 +1,7 @@
 <template>
   <div draggable="true" :data-component-id="params.componentId" @click.stop="openAttributesPanel">
-    <el-table :defaultSort="attributes.defaultSort" :highlightCurrentRow="attributes.highlightCurrentRow" :showHeader="attributes.showHeader" :fit="attributes.fit" :border="attributes.border" :height="attributes.height" :maxHeight="attributes.maxHeight" :size="attributes.size" :stripe="attributes.stripe" :data="datas" tooltip-effect="dark" style="width: 100%" @selection-change="handleSelectionChange">
-      <el-table-column :prop="col.prop" :label="col.label" v-for="col in attributes.cols" :key="col.prop"></el-table-column>
+    <el-table :highlightCurrentRow="attributes.highlightCurrentRow" :showHeader="attributes.showHeader" :fit="attributes.fit" :border="attributes.border" :height="attributes.height" :maxHeight="attributes.maxHeight" :size="attributes.size" :stripe="attributes.stripe" :data="datas.tableData" tooltip-effect="dark" style="width: 100%" @selection-change="handleSelectionChange">
+      <el-table-column :align="col.align" :showOverflowTooltip="col.showOverflowTooltip" :fixed="col.fixed" :minWidth="col.minWidth" :width="col.width" :type="col.type" :prop="col.prop" :label="col.label" v-for="col in attributes.cols" :key="col.prop"></el-table-column>
     </el-table>
   </div>
 </template>
@@ -34,7 +34,9 @@ export default {
   data() {
     return {
       style: '',
-      datas: '',
+      datas: {
+        tableData: []
+      },
       attributes: ''
     }
   },
@@ -51,12 +53,14 @@ export default {
       this.style = this.componentsStyles[this.params.componentId]
     },
     getData() {
-      const data = this.componentsDatas[this.params.componentId]
-      if (Object.prototype.toString.call(data) == '[object Array]') {
-        this.datas = data
-      } else {
-        this.datas = []
+      if (this.componentsDatas[this.params.componentId].tableData) {
+        this.datas.tableData = this.componentsDatas[this.params.componentId].tableData
       }
+      // if (Object.prototype.toString.call(data) == '[object Array]') {
+      //   this.datas = data
+      // } else {
+      //   this.datas = []
+      // }
     },
     // 打开属性配置面板
     openAttributesPanel(ev) {

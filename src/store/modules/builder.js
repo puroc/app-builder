@@ -136,6 +136,9 @@ const builder = {
     },
     SET_COMPONENT_PARAMS: (state, component) => {
       state.componentsParams[component.componentId] = component.params
+    },
+    SET_COMPONENT_DATAS: (state, component) => {
+      state.componentsDatas[component.componentId] = component.datas
     }
   },
   actions: {
@@ -179,6 +182,9 @@ const builder = {
     },
     setComponentParams: ({ commit }, component) => {
       commit('SET_COMPONENT_PARAMS', component)
+    },
+    setComponentDatas: ({ commit }, component) => {
+      commit('SET_COMPONENT_DATAS', component)
     }
   }
 }

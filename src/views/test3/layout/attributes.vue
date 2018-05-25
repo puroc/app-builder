@@ -6,6 +6,9 @@
     <el-tab-pane label="属性" name="attributeTab">
       <component :is="component" :params="params" :key="currentComponent.componentId" />
     </el-tab-pane>
+    <el-tab-pane label="数据" name="dataTab">
+      <data-editor></data-editor>
+    </el-tab-pane>
     <el-tab-pane label="事件" name="eventTab">
     </el-tab-pane>
     <el-tab-pane label="样式" name="cssTab">
@@ -36,4 +39,6 @@ export default {
   }
 }
 </script>
+
+
   
