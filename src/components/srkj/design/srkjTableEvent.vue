@@ -9,7 +9,8 @@
         <i class="el-icon-edit" @click="openCodeEditor('selectionChange')"></i>
       </el-form-item>
     </el-form>
-    <code-editor :dialogVisible='dialogVisible' :method='method' @close='dialogVisible = false'></code-editor>
+    <code-editor :params='codeEditorParams' @close='codeEditorParams.visible = false'></code-editor>
+    <!-- <code-editor :dialogVisible='dialogVisible' :method='method' @close='dialogVisible = false'></code-editor> -->
   </div>
 </template>
 <script>
@@ -26,13 +27,12 @@ export default {
     return {
       labelPosition: 'right',
       model: {},
-      dialogVisible: false,
-      title: '',
-      method: ''
-      // codeEditorParams: {
-      //   title: 'hahaha',
-      //   visible: true
-      // }
+      // dialogVisible: false,
+      // method: ''
+      codeEditorParams: {
+        method: '',
+        visible: false
+      }
     }
   },
   created() {
@@ -54,19 +54,11 @@ export default {
     }
   },
   methods: {
-    handleClose(done) {
-      this.$confirm('确认关闭？')
-        .then(_ => {
-          done()
-        })
-        .catch(_ => {})
-    },
-    openCodeEditor(title) {
-      this.dialogVisible = true
-      this.title = title
-      this.method = this.model[title]
-      // this.codeEditorParams.title = 'hahaha'
-      // this.codeEditorParams.visible = true
+    // 打开代码编辑器
+    openCodeEditor(event) {
+      this.codeEditorParams.componentId = this.params.componentId
+      this.codeEditorParams.method = this.model[event]
+      this.codeEditorParams.visible = true
     },
     // 保存组件事件数据
     save() {
