@@ -10,7 +10,6 @@
       </el-form-item>
     </el-form>
     <code-editor :params='codeEditorParams' @close='codeEditorParams.visible = false'></code-editor>
-    <!-- <code-editor :dialogVisible='dialogVisible' :method='method' @close='dialogVisible = false'></code-editor> -->
   </div>
 </template>
 <script>
