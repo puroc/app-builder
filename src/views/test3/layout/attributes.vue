@@ -4,12 +4,13 @@
       <param-editor></param-editor>
     </el-tab-pane>
     <el-tab-pane label="属性" name="attributeTab">
-      <component :is="component" :params="params" :key="currentComponent.componentId" />
+      <component :is="attribute" :params="params" :key="currentComponent.componentId" />
     </el-tab-pane>
     <el-tab-pane label="数据" name="dataTab">
       <data-editor></data-editor>
     </el-tab-pane>
     <el-tab-pane label="事件" name="eventTab">
+      <component :is="event" :params="params" :key="currentComponent.componentId" />
     </el-tab-pane>
     <el-tab-pane label="样式" name="cssTab">
       <style-editor></style-editor>
@@ -17,7 +18,8 @@
   </el-tabs>
 </template>
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters } from 'vuex';
+import Vue from 'vue';
 export default {
   computed: {
     ...mapGetters([
@@ -25,8 +27,19 @@ export default {
       'componentsParams',
       'componentsAttributes'
     ]),
-    component() {
-      return this.currentComponent.componentType + '-config'
+    attribute() {
+      return this.currentComponent.componentType + '-config';
+    },
+    event() {
+      const componentName = this.currentComponent.componentType + '-event';
+      if (Vue.component(componentName)) {
+        return componentName
+      } else {
+        return '';
+      }
+      // const b = Vue.component('srkj-table-event')
+
+      // return this.currentComponent.componentType + '-event'
     },
     params() {
       return this.componentsParams[this.currentComponent.componentId]
