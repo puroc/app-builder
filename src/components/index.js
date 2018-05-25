@@ -5,6 +5,7 @@ import srkjButtonConfig from './srkj/design/srkjButtonConfig'
 import styleEditor from './srkj/design/styleEditor'
 import paramEditor from './srkj/design/paramEditor'
 import dataEditor from './srkj/design/dataEditor'
+import codeEditor from './srkj/design/codeEditor'
 import srkjTable from './srkj/design/srkjTable'
 import srkjTableConfig from './srkj/design/srkjTableConfig'
 import srkjTableEvent from './srkj/design/srkjTableEvent'
@@ -19,6 +20,7 @@ export default (Vue) => {
   Vue.component('style-editor', styleEditor)
   Vue.component('param-editor', paramEditor)
   Vue.component('data-editor', dataEditor)
+  Vue.component('code-editor', codeEditor)
   Vue.component('srkj-table', srkjTable)
   Vue.component('srkj-table-config', srkjTableConfig)
   Vue.component('srkj-table-event', srkjTableEvent)

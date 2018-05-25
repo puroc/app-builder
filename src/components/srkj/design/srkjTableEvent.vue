@@ -2,10 +2,14 @@
   <div>
     <el-form :label-position="labelPosition" size='small' :model="model">
       <el-form-item>
-        <div>selection-change <i class="el-icon-edit"></i></div>
-        <el-input v-model="model.selectionChange" style="display:inline"></el-input>
+        <div>selection-change
+          <i class="el-icon-info" title="当选择项发生变化时会触发该事件"></i>
+        </div>
+        <el-input v-model="model.selectionChange"></el-input>
+        <i class="el-icon-edit" @click="openCodeEditor('selectionChange')"></i>
       </el-form-item>
     </el-form>
+    <code-editor :dialogVisible='dialogVisible' :method='method' @close='dialogVisible = false'></code-editor>
   </div>
 </template>
 <script>
@@ -21,7 +25,14 @@ export default {
   data() {
     return {
       labelPosition: 'right',
-      model: {}
+      model: {},
+      dialogVisible: false,
+      title: '',
+      method: ''
+      // codeEditorParams: {
+      //   title: 'hahaha',
+      //   visible: true
+      // }
     }
   },
   created() {
@@ -43,6 +54,20 @@ export default {
     }
   },
   methods: {
+    handleClose(done) {
+      this.$confirm('确认关闭？')
+        .then(_ => {
+          done()
+        })
+        .catch(_ => {})
+    },
+    openCodeEditor(title) {
+      this.dialogVisible = true
+      this.title = title
+      this.method = this.model[title]
+      // this.codeEditorParams.title = 'hahaha'
+      // this.codeEditorParams.visible = true
+    },
     // 保存组件事件数据
     save() {
       const componentsEvents = {
@@ -55,8 +80,8 @@ export default {
 }
 </script>
 <style scoped>
-.el-select {
-  width: 100%;
+.el-input {
+  width: 90%;
 }
 </style>
 
