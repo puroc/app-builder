@@ -16,7 +16,6 @@
 import { mapGetters } from 'vuex'
 import { deepCopy } from '@/utils'
 import { getBus } from '@/utils/bus'
-// import { showConfirmMsg } from '@/utils/index';
 export default {
   props: ['params'],
   computed: {
