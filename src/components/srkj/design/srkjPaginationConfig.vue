@@ -9,20 +9,20 @@
         </el-option>
       </el-select>
     </el-form-item>
-    <div hidden>
+    <!-- <div hidden> -->
       <el-form-item label="总条数">
         <el-input-number v-model="model.total"></el-input-number>
       </el-form-item>
       <el-form-item label="当前页数">
         <el-input-number v-model="model.currentPage"></el-input-number>
       </el-form-item>
-    </div>
+    <!-- </div> -->
   </el-form>
 </template>
 <script>
-import { mapGetters } from 'vuex';
-import { deepCopy } from '@/utils';
-import { getBus } from '@/utils/bus';
+import { mapGetters } from 'vuex'
+import { deepCopy } from '@/utils'
+import { getBus } from '@/utils/bus'
 export default {
   props: ['params'],
   computed: {
