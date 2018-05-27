@@ -82,7 +82,7 @@ export default {
       }
     },
     handleSelectionChange() {
-      this.$emit('handleSelectionChange')
+      this.$emit('selection-change')
     }
   }
 }

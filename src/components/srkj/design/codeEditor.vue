@@ -3,7 +3,6 @@
     <el-form :label-position="labelPosition" size='small' :model="model">
       <el-form-item>
         <el-input type="textarea"  id="code" name="code" v-model="model.codes" class="form-control"></el-input>
-        <!-- <textarea class="form-control" id="code" name="code"></textarea> -->
       </el-form-item>
     </el-form>
     <span slot="footer" class="dialog-footer">
