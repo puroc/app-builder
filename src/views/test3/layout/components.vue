@@ -3,6 +3,7 @@
     <el-button id='a' name="srkj-layout" type="primary" draggable="true">布局组件</el-button>
     <el-button id='b' name="srkj-button" type="primary" draggable="true">按钮组件</el-button>
     <el-button id='c' name="srkj-table" type="primary" draggable="true">表格组件</el-button>
+    <el-button id='d' name="srkj-pagination" type="primary" draggable="true">分页组件</el-button>
   </div>
 </template>
 <script>

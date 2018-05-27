@@ -1,14 +1,14 @@
 <template>
-  <el-table border stripe highlight-current-row :data="datas.tableData" tooltip-effect="dark" style="width: 100%" max-height="600">
-    <el-table-column :prop="column.prop" :label="column.label" v-for="column in datas.tableColumns" :key="column.prop"></el-table-column>
-  </el-table>
+  <el-table :highlightCurrentRow="attributes.highlightCurrentRow" :showHeader="attributes.showHeader" :fit="attributes.fit" :border="attributes.border" :height="attributes.height" :maxHeight="attributes.maxHeight" :size="attributes.size" :stripe="attributes.stripe" :data="datas.tableData" tooltip-effect="dark" @selection-change="handleSelectionChange">
+      <el-table-column :align="col.align" :showOverflowTooltip="col.showOverflowTooltip" :fixed="col.fixed" :minWidth="col.minWidth" :width="col.width" :type="col.type" :prop="col.prop" :label="col.label" v-for="col in attributes.cols" :key="col.prop"></el-table-column>
+    </el-table>
 </template>
 <script>
 export default {
-  props: ['attributes', 'datas'],
+  props: ['attributes', 'datas', 'events'],
   methods: {
-    click() {
-      this.$emit('click')
+    handleSelectionChange() {
+      this.$emit('handleSelectionChange')
     }
   }
 }

@@ -13,47 +13,64 @@ export default {
         size: 'mini',
         plain: true
       },
-      data1: {
-        tableData: [
+      attributes3: {
+        cols: [
           {
-            date: '2016-05-02',
-            name: 'aa',
-            address: '上海市普陀区金沙江路 1518 弄'
+            id: '0',
+            prop: 'num',
+            label: '序号',
+            type: 'selection'
           },
           {
-            date: '2016-05-04',
-            name: 'a',
-            address: '上海市普陀区金沙江路 1517 弄'
-          },
-          {
-            date: '2016-05-01',
-            name: '123',
-            address: '上海市普陀区金沙江路 1519 弄'
-          },
-          {
-            date: '2016-05-03',
-            name: 'da',
-            address: '上海市普陀区金沙江路 1516 弄'
-          }
-        ],
-        tableColumns: [
-          {
+            id: '1',
             prop: 'date',
             label: '日期11'
           },
           {
+            id: '2',
             prop: 'name',
             label: '姓名22'
           },
           {
+            id: '3',
             prop: 'address',
             label: '地址33'
           }
         ]
+      },
+      data3: {
+        tableData: [
+          {
+            date: '2016-05-02',
+            name: 'a',
+            address: 'aa'
+          },
+          {
+            date: '2016-05-04',
+            name: 'b',
+            address: 'bb'
+          },
+          {
+            date: '2016-05-01',
+            name: 'c',
+            address: 'cc'
+          },
+          {
+            date: '2016-05-03',
+            name: 'd',
+            address: 'dd'
+          }
+        ]
+      },
+      event3: {
+        xixi: 'handle'
       }
     }
   },
   methods: {
+    handleSelectionChange() {
+      alert('haha')
+    },
     a() {
       alert('a')
     },

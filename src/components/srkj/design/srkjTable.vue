@@ -38,6 +38,9 @@ export default {
         tableData: []
       },
       attributes: ''
+      // events: {
+      //   selectionChange: 'handleSelectionChange'
+      // }
     }
   },
   methods: {
@@ -45,7 +48,13 @@ export default {
       this.getAttributes()
       this.getStyle()
       this.getData()
+      // this.getEvent()
     },
+    // getEvent() {
+    //   if (this.componentsEvents[this.params.componentId]) {
+    //     this.events = this.componentsEvents[this.params.componentId]
+    //   }
+    // },
     getAttributes() {
       this.attributes = this.componentsAttributes[this.params.componentId]
     },
@@ -72,7 +81,9 @@ export default {
         })
       }
     },
-    handleSelectionChange() {}
+    handleSelectionChange() {
+      this.$emit('handleSelectionChange')
+    }
   }
 }
 </script>

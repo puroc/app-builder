@@ -9,6 +9,8 @@ import codeEditor from './srkj/design/codeEditor'
 import srkjTable from './srkj/design/srkjTable'
 import srkjTableConfig from './srkj/design/srkjTableConfig'
 import srkjTableEvent from './srkj/design/srkjTableEvent'
+import srkjPagination from './srkj/design/srkjPagination'
+import srkjPaginationConfig from './srkj/design/srkjPaginationConfig'
 import srButton from './srkj/run/srButton'
 import srTable from './srkj/run/srTable'
 
@@ -24,6 +26,8 @@ export default (Vue) => {
   Vue.component('srkj-table', srkjTable)
   Vue.component('srkj-table-config', srkjTableConfig)
   Vue.component('srkj-table-event', srkjTableEvent)
+  Vue.component('srkj-pagination', srkjPagination)
+  Vue.component('srkj-pagination-config', srkjPaginationConfig)
   Vue.component('sr-button', srButton)
   Vue.component('sr-table', srTable)
 }
