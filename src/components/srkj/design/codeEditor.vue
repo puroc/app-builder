@@ -21,11 +21,6 @@ export default {
   computed: {
     ...mapGetters(['componentsCodes'])
   },
-  data() {
-    return {
-      mirror: ''
-    }
-  },
   updated() {
     if (!this.mirror) {
       this.mirror = CodeMirror.fromTextArea(document.getElementById('code'), {
@@ -55,6 +50,7 @@ export default {
   data() {
     return {
       labelPosition: 'right',
+      mirror: '',
       model: {
         codes: ''
       }
