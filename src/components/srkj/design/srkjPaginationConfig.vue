@@ -1,8 +1,5 @@
 <template>
   <el-form :label-position="labelPosition" label-width="80px" size='small' :model="model">
-    <el-form-item label="小型分页">
-      <el-checkbox v-model="model.small"></el-checkbox>
-    </el-form-item>
     <el-form-item label="背景色">
       <el-checkbox v-model="model.background"></el-checkbox>
     </el-form-item>
@@ -12,18 +9,20 @@
         </el-option>
       </el-select>
     </el-form-item>
-    <el-form-item label="总条数">
-      <el-input-number v-model="model.total" :min="0" :max="1000"></el-input-number>
-    </el-form-item>
-    <el-form-item label="当前页数">
-      <el-input-number v-model="model.currentPage" :min="0" :max="1000"></el-input-number>
-    </el-form-item>
+    <div hidden>
+      <el-form-item label="总条数">
+        <el-input-number v-model="model.total"></el-input-number>
+      </el-form-item>
+      <el-form-item label="当前页数">
+        <el-input-number v-model="model.currentPage"></el-input-number>
+      </el-form-item>
+    </div>
   </el-form>
 </template>
 <script>
-import { mapGetters } from 'vuex'
-import { deepCopy } from '@/utils'
-import { getBus } from '@/utils/bus'
+import { mapGetters } from 'vuex';
+import { deepCopy } from '@/utils';
+import { getBus } from '@/utils/bus';
 export default {
   props: ['params'],
   computed: {
@@ -55,9 +54,7 @@ export default {
     }
   },
   created() {
-    this.model = deepCopy(
-      this.componentsAttributes[this.params.componentId]
-    )
+    this.model = deepCopy(this.componentsAttributes[this.params.componentId])
   },
   mounted() {
     // 注册保存组件和删除组件的事件
