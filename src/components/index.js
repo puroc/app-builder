@@ -14,6 +14,8 @@ import srkjPagination from './srkj/design/srkjPagination'
 import srkjPaginationConfig from './srkj/design/srkjPaginationConfig'
 import srkjForm from './srkj/design/srkjForm'
 import srkjFormConfig from './srkj/design/srkjFormConfig'
+import srkjInput from './srkj/design/srkjInput'
+import srkjInputConfig from './srkj/design/srkjInputConfig'
 import srButton from './srkj/run/srButton'
 import srTable from './srkj/run/srTable'
 
@@ -34,6 +36,8 @@ export default (Vue) => {
   Vue.component('srkj-pagination-config', srkjPaginationConfig)
   Vue.component('srkj-form', srkjForm)
   Vue.component('srkj-form-config', srkjFormConfig)
+  Vue.component('srkj-input', srkjInput)
+  Vue.component('srkj-input-config', srkjInputConfig)
   Vue.component('sr-button', srButton)
   Vue.component('sr-table', srTable)
 }

@@ -1,6 +1,8 @@
 <template>
   <el-form :label-position="labelPosition" label-width="80px" size='small' :model="model">
-    
+    <el-form-item label="标签名称">
+      <el-input v-model="model.label" placeholder=""></el-input>
+    </el-form-item>
   </el-form>
 </template>
 <script>
@@ -15,7 +17,8 @@ export default {
   data() {
     return {
       labelPosition: 'right',
-      model: {},
+      model: {
+      },
       size: ''
     }
   },

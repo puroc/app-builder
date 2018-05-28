@@ -1,7 +1,8 @@
 <template>
-  <div @click.stop="openAttributesPanel">
-    <el-dialog :data-component-id="params.componentId" :title="attributes.title" :visible.sync="attributes.visible" top="5vh">
-    </el-dialog>
+  <div draggable="true" @click.stop="openAttributesPanel">
+    <el-form-item :label="attributes.label">
+      <el-input :data-component-id="params.componentId" placeholder="请输入内容"></el-input>
+    </el-form-item>
   </div>
 </template>
 <script>
@@ -23,7 +24,9 @@ export default {
   data() {
     return {
       style: '',
-      attributes: {}
+      attributes: {
+        label: '标签名称'
+      }
     }
   },
   created() {
@@ -42,6 +45,9 @@ export default {
     },
     getAttributes() {
       this.attributes = this.componentsAttributes[this.params.componentId]
+      // if (!this.attributes.label) {
+      //   this.attributes['label'] = 'abc'
+      // }
     },
     getStyle() {
       this.style = this.componentsStyles[this.params.componentId]
