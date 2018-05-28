@@ -113,6 +113,14 @@ a:hover {
   width: 100%;
 }
 
+.CodeMirror {
+  height: 500px;
+}
+
+.CodeMirror pre {
+  font-size: 18px;
+}
+
 // 以下为测试使用
 // .row{
 //   height: 100%;

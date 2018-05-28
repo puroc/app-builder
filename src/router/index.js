@@ -113,16 +113,22 @@ export const constantRouterMap = [
         meta: { title: '测试页面2', icon: 'example' }
       },
       {
-        path: 'test3',
-        name: 'test3',
-        component: () => import('@/views/test3/index'),
-        meta: { title: '测试页面3', icon: 'example' }
+        path: 'builder',
+        name: 'builder',
+        component: () => import('@/views/builder/index'),
+        meta: { title: '构建页面', icon: 'example' }
       },
       {
         path: 'test4',
         name: 'test4',
         component: () => import('@/views/test4/index'),
         meta: { title: '测试页面4', icon: 'example' }
+      },
+      {
+        path: 'test5',
+        name: 'test5',
+        component: () => import('@/views/test5/index'),
+        meta: { title: '测试页面5', icon: 'example' }
       }
     ],
     permission: 'test'

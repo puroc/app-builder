@@ -11,6 +11,8 @@ import srkjTableConfig from './srkj/design/srkjTableConfig'
 import srkjTableEvent from './srkj/design/srkjTableEvent'
 import srkjPagination from './srkj/design/srkjPagination'
 import srkjPaginationConfig from './srkj/design/srkjPaginationConfig'
+import srkjForm from './srkj/design/srkjForm'
+import srkjFormConfig from './srkj/design/srkjFormConfig'
 import srButton from './srkj/run/srButton'
 import srTable from './srkj/run/srTable'
 
@@ -28,6 +30,8 @@ export default (Vue) => {
   Vue.component('srkj-table-event', srkjTableEvent)
   Vue.component('srkj-pagination', srkjPagination)
   Vue.component('srkj-pagination-config', srkjPaginationConfig)
+  Vue.component('srkj-form', srkjForm)
+  Vue.component('srkj-form-config', srkjFormConfig)
   Vue.component('sr-button', srButton)
   Vue.component('sr-table', srTable)
 }

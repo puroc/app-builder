@@ -1,8 +1,8 @@
 <template>
-  <el-dialog title="JS编辑器" :visible.sync="params.visible" width="100%" :before-close="handleClose">
+  <el-dialog title="JS编辑器" :visible.sync="params.visible" fullscreen="fullscreen" :before-close="handleClose">
     <el-form :label-position="labelPosition" size='small' :model="model">
       <el-form-item>
-        <el-input type="textarea"  id="code" name="code" v-model="model.codes" class="form-control"></el-input>
+        <el-input type="textarea" id="code" name="code" v-model="model.codes" class="form-control"></el-input>
       </el-form-item>
     </el-form>
     <span slot="footer" class="dialog-footer">
@@ -21,6 +21,11 @@ export default {
   computed: {
     ...mapGetters(['componentsCodes'])
   },
+  data() {
+    return {
+      fullscreen: true
+    }
+  },
   updated() {
     if (!this.mirror) {
       this.mirror = CodeMirror.fromTextArea(document.getElementById('code'), {
@@ -34,7 +39,7 @@ export default {
         foldGutter: true,
         gutters: ['CodeMirror-linenumbers', 'CodeMirror-foldgutter'],
         matchBrackets: true // 括号匹配
-      // readOnly: true,        //只读
+        // readOnly: true,        //只读
       })
     }
   },
@@ -78,4 +83,6 @@ export default {
   }
 }
 </script>
+
+
 

@@ -22,7 +22,7 @@
     </div>
     <div slot="table">
       <el-table border stripe highlight-current-row :data="users" tooltip-effect="dark" style="width: 100%" max-height="600" @selection-change="handleSelectionChange">
-        <el-table-column type="selection"/>
+        <el-table-column type="selection" />
         <el-table-column prop="name" label="姓名" />
         <el-table-column prop="username" label="用户名" />
         <el-table-column prop="phone" label="手机" />
@@ -42,68 +42,72 @@
         </el-pagination>
       </div>
       <!-- details dialog -->
-    <el-dialog title="用户详情" :visible.sync="editDialogFormVisible" top="5vh">
-      <div>
-        <el-button type="primary" icon="el-icon-edit" plain @click="switchToEdit" style="float:right;margin-right:5%"></el-button>
-      </div>
-      <br/>
-      <!-- <div style="margin:5%; height:600px; overflow:auto"> -->
-      <div style="margin:5%;">
-        <el-form :model="editUserModel" :rules="validateUserRules" ref="editUserForm">
-          <el-form-item label="用户名" :label-width="formLabelWidth">
-            <el-input v-model="editUserModel.username" auto-complete="off" disabled></el-input>
-          </el-form-item>
-          <el-form-item label="姓名" :label-width="formLabelWidth">
-            <el-input v-model="editUserModel.name" auto-complete="off" :disabled="editable"></el-input>
-          </el-form-item>
-          <el-form-item label="手机" :label-width="formLabelWidth">
-            <el-input v-model="editUserModel.phone" auto-complete="off" :disabled="editable"></el-input>
-          </el-form-item>
-          <el-form-item label="邮箱" :label-width="formLabelWidth">
-            <el-input v-model="editUserModel.email" auto-complete="off" :disabled="editable"></el-input>
-          </el-form-item>
-        </el-form>
-      </div>
-      <div slot="footer" class="dialog-footer">
-        <el-button @click="editDialogFormVisible=false">取 消</el-button>
-        <el-button type="primary" @click="editUser">确 定</el-button>
-      </div>
-    </el-dialog>
+      <el-dialog title="用户详情" :visible.sync="editDialogFormVisible" top="5vh">
+        <div>
+          <el-button type="primary" icon="el-icon-edit" plain @click="switchToEdit" style="float:right;margin-right:5%"></el-button>
+        </div>
+        <br/>
+        <!-- <div style="margin:5%; height:600px; overflow:auto"> -->
+        <div style="margin:5%;">
+          <el-form :model="editUserModel" :rules="validateUserRules" ref="editUserForm">
+            <el-form-item label="用户名" :label-width="formLabelWidth" prop='username'>
+              <el-input v-model="editUserModel.username" auto-complete="off" disabled></el-input>
+            </el-form-item>
+            <el-form-item label="姓名" :label-width="formLabelWidth" prop='name'>
+              <el-input v-model="editUserModel.name" auto-complete="off" :disabled="editable"></el-input>
+            </el-form-item>
+            <el-form-item label="手机" :label-width="formLabelWidth" prop='phone'>
+              <el-input v-model="editUserModel.phone" auto-complete="off" :disabled="editable"></el-input>
+            </el-form-item>
+            <el-form-item label="邮箱" :label-width="formLabelWidth" prop='email'>
+              <el-input v-model="editUserModel.email" auto-complete="off" :disabled="editable"></el-input>
+            </el-form-item>
+          </el-form>
+        </div>
+        <div slot="footer" class="dialog-footer">
+          <el-button @click="editDialogFormVisible=false">取 消</el-button>
+          <el-button type="primary" @click="editUser">确 定</el-button>
+        </div>
+      </el-dialog>
 
-    <!-- add dialog -->
-    <el-dialog title="添加用户" :visible.sync="addDialogFormVisible" top="5vh">
-      <br/>
-      <div>
-        <el-form :model="addUserModel" :rules="validateUserRules" ref="addUserForm">
-          <el-form-item label="用户名" :label-width="formLabelWidth" prop='username'>
-            <el-input v-model="addUserModel.username" auto-complete="off"></el-input>
-          </el-form-item>
-          <el-form-item label="密码" :label-width="formLabelWidth" prop='password'>
-            <el-input type="password" v-model="addUserModel.password" auto-complete="off"></el-input>
-          </el-form-item>
-          <el-form-item label="姓名" :label-width="formLabelWidth" prop='name'>
-            <el-input v-model="addUserModel.name" auto-complete="off"></el-input>
-          </el-form-item>
-          <el-form-item label="手机" :label-width="formLabelWidth" prop='phone'>
-            <el-input v-model="addUserModel.phone" auto-complete="off"></el-input>
-          </el-form-item>
-          <el-form-item label="邮箱" :label-width="formLabelWidth" prop='email'>
-            <el-input v-model="addUserModel.email" auto-complete="off"></el-input>
-          </el-form-item>
-        </el-form>
-      </div>
-      <div slot="footer" class="dialog-footer">
-        <el-button @click="addDialogFormVisible=false">取 消</el-button>
-        <el-button type="primary" @click="addUser">确 定</el-button>
-      </div>
-    </el-dialog>
+      <!-- add dialog -->
+      <el-dialog title="添加用户" :visible.sync="addDialogFormVisible" top="5vh">
+        <el-row>
+          <br/>
+          <div>
+            <el-form :model="addUserModel" :rules="validateUserRules" ref="addUserForm">
+              <el-row>
+                <el-form-item label="用户名" :label-width="formLabelWidth" prop='username'>
+                  <el-input v-model="addUserModel.username" auto-complete="off"></el-input>
+                </el-form-item>
+                <el-form-item label="密码" :label-width="formLabelWidth" prop='password'>
+                  <el-input type="password" v-model="addUserModel.password" auto-complete="off"></el-input>
+                </el-form-item>
+                <el-form-item label="姓名" :label-width="formLabelWidth" prop='name'>
+                  <el-input v-model="addUserModel.name" auto-complete="off"></el-input>
+                </el-form-item>
+                <el-form-item label="手机" :label-width="formLabelWidth" prop='phone'>
+                  <el-input v-model="addUserModel.phone" auto-complete="off"></el-input>
+                </el-form-item>
+                <el-form-item label="邮箱" :label-width="formLabelWidth" prop='email'>
+                  <el-input v-model="addUserModel.email" auto-complete="off"></el-input>
+                </el-form-item>
+              </el-row>
+            </el-form>
+          </div>
+        </el-row>
+        <div slot="footer" class="dialog-footer">
+          <el-button @click="addDialogFormVisible=false">取 消</el-button>
+          <el-button type="primary" @click="addUser">确 定</el-button>
+        </div>
+      </el-dialog>
     </div>
   </layout>
 </template>
 <script>
-import layout from './layout'
-import Org from '@/components/Org'
-import test from './test'
+import layout from './layout';
+import Org from '@/components/Org';
+import test from './test';
 export default {
   ...test,
   components: {
