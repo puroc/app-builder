@@ -28,9 +28,9 @@
   </el-form>
 </template>
 <script>
-import { mapGetters } from 'vuex'
-import { deepCopy } from '@/utils'
-import { getBus } from '@/utils/bus'
+import { mapGetters } from 'vuex';
+import { deepCopy } from '@/utils';
+import { getBus } from '@/utils/bus';
 export default {
   props: ['params'],
   computed: {
@@ -76,7 +76,16 @@ export default {
     }
   },
   created() {
-    this.model = deepCopy(this.componentsAttributes[this.params.componentId])
+    const componentAttributes = deepCopy(
+      this.componentsAttributes[this.params.componentId]
+    )
+    if (componentAttributes.model) {
+      componentAttributes.model = JSON.stringify(componentAttributes.model)
+    }
+    if (componentAttributes.rules) {
+      componentAttributes.rules = JSON.stringify(componentAttributes.rules)
+    }
+    this.formModel = componentAttributes
   },
   mounted() {
     // 注册保存组件和删除组件的事件
@@ -98,6 +107,18 @@ export default {
         componentId: this.params.componentId
       }
       componentAttributes[this.params.componentId] = deepCopy(this.formModel)
+      // 如果设置了model，则将其转换为json对象，因为form组件要求model属性是对象类型
+      if (componentAttributes[this.params.componentId].model) {
+        componentAttributes[this.params.componentId].model = JSON.parse(
+          this.formModel.model
+        )
+      }
+      // 如果设置了rules，则将其转换为json对象，因为form组件要求rules属性是对象类型
+      if (componentAttributes[this.params.componentId].rules) {
+        componentAttributes[this.params.componentId].rules = JSON.parse(
+          this.formModel.rules
+        )
+      }
       this.$store.dispatch('setComponentAttributes', componentAttributes)
     },
     // 删除组件
