@@ -54,6 +54,7 @@ export default {
     }
 
     return {
+      radio1: '选中且禁用',
       storeState: Store.state,
       users: [],
       multipleSelection: [],

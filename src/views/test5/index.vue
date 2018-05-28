@@ -1,7 +1,7 @@
 <template>
   <layout>
     <div slot="content">
-       <el-dialog title="添加用户" :visible.sync="addDialogFormVisible" top="5vh">
+      <el-dialog title="添加用户" :visible.sync="addDialogFormVisible" top="5vh">
         <el-row>
           <br/>
           <div>
@@ -20,7 +20,9 @@
                   <el-input v-model="addUserModel.phone" auto-complete="off"></el-input>
                 </el-form-item>
                 <el-form-item label="邮箱" :label-width="formLabelWidth" prop='email'>
-                  <el-input v-model="addUserModel.email" auto-complete="off"></el-input>
+                  <!-- <el-input v-model="addUserModel.email" auto-complete="off"></el-input> -->
+                  <el-radio disabled v-model="radio1" label="禁用">备选项</el-radio>
+                  <el-radio disabled v-model="radio1" label="选中且禁用">备选项</el-radio>
                 </el-form-item>
               </el-row>
             </el-form>
@@ -42,6 +44,7 @@ export default {
   components: {
     layout
   }
+
 }
 </script>
 
