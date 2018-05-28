@@ -6,6 +6,7 @@
     <el-button id='d' name="srkj-pagination" type="primary" draggable="true">分页</el-button>
     <el-button id='e' name="srkj-form" type="primary" draggable="true">表单</el-button>
     <el-button id='f' name="srkj-input" type="primary" draggable="true">输入框</el-button>
+    <el-button id='g' name="srkj-radio" type="primary" draggable="true">单选按钮</el-button>
   </div>
 </template>
 <script>

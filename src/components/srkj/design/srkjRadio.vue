@@ -1,7 +1,7 @@
 <template>
-  <div draggable="true" :data-component-id="params.componentId" @click.stop="openAttributesPanel">
+  <div draggable="true" :data-component-id="params.componentId" @click.stop="openAttributesPanel" style="display:inline">
     <el-form-item :label="attributes.formLabel">
-      <el-input placeholder="请输入内容"></el-input>
+      <el-radio :label="attributes.value">{{attributes.name}}</el-radio>
     </el-form-item>
   </div>
 </template>

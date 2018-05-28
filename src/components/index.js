@@ -16,6 +16,8 @@ import srkjForm from './srkj/design/srkjForm'
 import srkjFormConfig from './srkj/design/srkjFormConfig'
 import srkjInput from './srkj/design/srkjInput'
 import srkjInputConfig from './srkj/design/srkjInputConfig'
+import srkjRadio from './srkj/design/srkjRadio'
+import srkjRadioConfig from './srkj/design/srkjRadioConfig'
 import srButton from './srkj/run/srButton'
 import srTable from './srkj/run/srTable'
 
@@ -38,6 +40,8 @@ export default (Vue) => {
   Vue.component('srkj-form-config', srkjFormConfig)
   Vue.component('srkj-input', srkjInput)
   Vue.component('srkj-input-config', srkjInputConfig)
+  Vue.component('srkj-radio', srkjRadio)
+  Vue.component('srkj-radio-config', srkjRadioConfig)
   Vue.component('sr-button', srButton)
   Vue.component('sr-table', srTable)
 }

@@ -3,6 +3,12 @@
     <el-form-item label="标签名称">
       <el-input v-model="model.formLabel" placeholder=""></el-input>
     </el-form-item>
+    <el-form-item label="显示名称">
+      <el-input v-model="model.name" placeholder=""></el-input>
+    </el-form-item>
+    <el-form-item label="值">
+      <el-input v-model="model.value" placeholder=""></el-input>
+    </el-form-item>
   </el-form>
 </template>
 <script>
