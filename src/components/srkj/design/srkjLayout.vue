@@ -144,15 +144,15 @@ export default {
         //  )
         params = ev.dataTransfer.getData('params')
           ? JSON.parse(ev.dataTransfer.getData('params'))
-          : ''
+          : {}
         params.rowId = rowId
         params.colId = colId
         attributes = ev.dataTransfer.getData('attributes')
           ? JSON.parse(ev.dataTransfer.getData('attributes'))
-          : ''
+          : {}
         datas = ev.dataTransfer.getData('datas')
           ? JSON.parse(ev.dataTransfer.getData('datas'))
-          : ''
+          : {}
         // attributes = JSON.parse(
         //   ev.dataTransfer.getData('attributes')
         //     ? ev.dataTransfer.getData('attributes')

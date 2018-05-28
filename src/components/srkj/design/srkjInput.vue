@@ -25,7 +25,6 @@ export default {
     return {
       style: '',
       attributes: {
-        label: '标签名称'
       }
     }
   },
@@ -45,9 +44,9 @@ export default {
     },
     getAttributes() {
       this.attributes = this.componentsAttributes[this.params.componentId]
-      // if (!this.attributes.label) {
-      //   this.attributes['label'] = 'abc'
-      // }
+      if (!this.attributes.label) {
+        this.attributes.label = '标签名称'
+      }
     },
     getStyle() {
       this.style = this.componentsStyles[this.params.componentId]
