@@ -1,12 +1,12 @@
 <template>
   <div @click.stop="openAttributesPanel" class="layout-wrapper">
     <el-form :data-component-id="params.componentId" :ref="attributes.ref" :model="attributes.model" label-width="80px">
-      <srkj-layout :params="layoutParams"></srkj-layout>
+      <srkj-form-layout :params="layoutParams"></srkj-form-layout>
     </el-form>
   </div>
 </template>
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters } from 'vuex'
 export default {
   props: ['params'],
   computed: {
@@ -28,7 +28,7 @@ export default {
       const params = {}
       params.componentId = this.layoutComponentId
       params.componentName = this.layoutComponentId
-      params.componentType = 'srkj-layout';
+      params.componentType = 'srkj-layout'
       return params
     },
     layoutAttributes() {

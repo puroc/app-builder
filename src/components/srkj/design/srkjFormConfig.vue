@@ -1,6 +1,8 @@
 <template>
-  <el-form :label-position="labelPosition" label-width="80px" size='small' :model="model">
-    
+  <el-form :label-position="labelPosition" label-width="80px" size='small' :model="formModel">
+     <el-form-item label="数据对象">
+      <el-input type="textarea" v-model="formModel.model"></el-input>  
+    </el-form-item>
   </el-form>
 </template>
 <script>
@@ -15,7 +17,7 @@ export default {
   data() {
     return {
       labelPosition: 'right',
-      model: {},
+      formModel: {},
       size: ''
     }
   },
@@ -41,7 +43,7 @@ export default {
       const componentAttributes = {
         componentId: this.params.componentId
       }
-      componentAttributes[this.params.componentId] = deepCopy(this.model)
+      componentAttributes[this.params.componentId] = deepCopy(this.formModel)
       this.$store.dispatch('setComponentAttributes', componentAttributes)
     },
     // 删除组件

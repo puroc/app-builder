@@ -1,4 +1,5 @@
 import srkjLayout from './srkj/design/srkjLayout'
+import srkjFormLayout from './srkj/design/srkjFormLayout'
 import srkjLayoutConfig from './srkj/design/srkjLayoutConfig'
 import srkjButton from './srkj/design/srkjButton'
 import srkjButtonConfig from './srkj/design/srkjButtonConfig'
@@ -18,6 +19,7 @@ import srTable from './srkj/run/srTable'
 
 export default (Vue) => {
   Vue.component('srkj-layout', srkjLayout)
+  Vue.component('srkj-form-layout', srkjFormLayout)
   Vue.component('srkj-layout-config', srkjLayoutConfig)
   Vue.component('srkj-button', srkjButton)
   Vue.component('srkj-button-config', srkjButtonConfig)
