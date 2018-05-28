@@ -1,7 +1,29 @@
 <template>
   <el-form :label-position="labelPosition" label-width="80px" size='small' :model="formModel">
-     <el-form-item label="数据对象">
-      <el-input type="textarea" v-model="formModel.model"></el-input>  
+    <el-form-item label="数据对象">
+      <el-input type="textarea" v-model="formModel.model"></el-input>
+    </el-form-item>
+    <el-form-item label="验证规则">
+      <el-input type="textarea" v-model="formModel.rules"></el-input>
+    </el-form-item>
+    <el-form-item label="标签位置">
+      <el-select v-model="formModel.labelPosition" placeholder="请选择">
+        <el-option v-for="item in labelPositionOptions" :key="item.value" :label="item.label" :value="item.value" />
+      </el-select>
+    </el-form-item>
+    <el-form-item label="行内模式">
+      <el-checkbox v-model="formModel.inline"></el-checkbox>
+    </el-form-item>
+    <el-form-item label="标签宽度">
+      <el-input v-model="formModel.labelWidth"></el-input>
+    </el-form-item>
+    <el-form-item label="组件尺寸">
+      <el-select v-model="formModel.sizePosition" placeholder="请选择">
+        <el-option v-for="item in sizeOptions" :key="item.value" :label="item.label" :value="item.value" />
+      </el-select>
+    </el-form-item>
+    <el-form-item label="禁用组件">
+      <el-checkbox v-model="formModel.disabled"></el-checkbox>
     </el-form-item>
   </el-form>
 </template>
@@ -17,8 +39,40 @@ export default {
   data() {
     return {
       labelPosition: 'right',
-      formModel: {},
-      size: ''
+      formModel: {
+        inline: false,
+        labelPosition: 'right',
+        disabled: false
+      },
+      size: '',
+      labelPositionOptions: [
+        {
+          value: 'right',
+          label: 'right'
+        },
+        {
+          value: 'left',
+          label: 'left'
+        },
+        {
+          value: 'top',
+          label: 'top'
+        }
+      ],
+      sizeOptions: [
+        {
+          value: 'medium',
+          label: 'medium'
+        },
+        {
+          value: 'small',
+          label: 'small'
+        },
+        {
+          value: 'mini',
+          label: 'mini'
+        }
+      ]
     }
   },
   created() {
