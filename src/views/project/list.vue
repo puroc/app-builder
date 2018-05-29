@@ -1,7 +1,7 @@
 <template>
     <div>
         <el-row>
-            <el-card :body-style="{ padding: '0px',height:'198px'}" class="add-el-card">
+            <el-card :body-style="{ padding: '0px',height:'195px'}" class="add-el-card">
                 <div class="add-button-wrapper">
                     <el-button type="text" class="add-button">添加</el-button>
                 </div>
