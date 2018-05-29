@@ -1,10 +1,10 @@
 <template>
- <div @click.stop="openAttributesPanel">
-  <el-pagination draggable="true" :data-component-id="params.componentId" @size-change="handleSizeChanle" @current-change="handleCurrentChange" :background="attributes.background" :current-page="attributes.currentPage" :page-sizes="[10, 20, 30, 40, 50, 100]" :page-size="attributes.pageSize" layout="total, sizes, prev, pager, next, jumper" :total="attributes.total"  :style='style'/>
+  <div draggable="true" :data-component-id="params.componentId" @click.stop="openAttributesPanel">
+    <el-pagination @size-change="handleSizeChanle" @current-change="handleCurrentChange" :background="attributes.background" :current-page="attributes.currentPage" :page-sizes="[10, 20, 30, 40, 50, 100]" :page-size="attributes.pageSize" layout="total, sizes, prev, pager, next, jumper" :total="attributes.total" :style='style' />
   </div>
 </template>
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters } from 'vuex';
 export default {
   props: ['params'],
   computed: {

@@ -1,5 +1,5 @@
 <template>
-  <div draggable="true" :data-component-id="params.componentId" @click.stop="openAttributesPanel" style="display:inline">
+  <div draggable="true" :data-component-id="params.componentId" @click.stop="openAttributesPanel">
     <el-form-item :label="attributes.formLabel">
       <!-- <el-radio :label="attributes.value">{{attributes.name}}</el-radio> -->
       <el-radio disabled  label="禁用">备选项</el-radio>
