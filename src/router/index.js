@@ -66,20 +66,20 @@ export const constantRouterMap = [
     ],
     permission: 'role'
   },
-  // {
-  //   path: '/project',
-  //   component: Layout,
-  //   name: '项目管理',
-  //   children: [
-  //     {
-  //       path: 'index',
-  //       name: 'role',
-  //       component: () => import('@/views/role/index'),
-  //       meta: { title: '项目管理', icon: 'example' }
-  //     }
-  //   ],
-  //   permission: 'role'
-  // },
+  {
+    path: '/project',
+    component: Layout,
+    name: '项目管理',
+    children: [
+      {
+        path: 'index',
+        name: 'project',
+        component: () => import('@/views/project/list'),
+        meta: { title: '项目管理', icon: 'example' }
+      }
+    ],
+    permission: 'role'
+  },
   // {
   //   path: '/shop',
   //   component: Layout,
