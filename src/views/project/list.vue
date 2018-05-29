@@ -1,16 +1,18 @@
 <template>
     <div>
         <el-row>
-            <!-- <el-col :span="8" v-for="(o, index) in 2" :key="o" :offset="index > 0 ? 2 : 0"> -->
+            <el-card :body-style="{ padding: '0px',height:'198px'}" class="add-el-card">
+                <div class="add-button-wrapper">
+                    <el-button type="text" class="add-button">添加</el-button>
+                </div>
+            </el-card>
             <div v-for="project in projects">
                 <el-card :body-style="{ padding: '0px' }">
                     <el-row>
-                        <el-col :span=12>
-                            <center>
-                                <img :src="cloud" class="image">
-                            </center>
+                        <el-col :span=12 class="img-wrapper">
+                            <img :src="cloud" class="image">
                         </el-col>
-                        <el-col :span=12>
+                        <el-col :span=12 class="title-wrapper">
                             <div class="title">
                                 好吃的汉堡
                             </div>
@@ -18,21 +20,16 @@
                     </el-row>
                     <div>
                         <el-row>
-                            <el-col :span=12 class="button">
-                                <center>
-                                    <el-button type="text">设计</el-button>
-                                </center>
+                            <el-col :span=12 class="button-wrapper">
+                                <el-button type="text">设计</el-button>
                             </el-col>
-                            <el-col :span=12 class="button">
-                                <center>
-                                    <el-button type="text">删除</el-button>
-                                </center>
+                            <el-col :span=12 class="button-wrapper">
+                                <el-button type="text">删除</el-button>
                             </el-col>
                         </el-row>
                     </div>
                 </el-card>
             </div>
-            <!-- </el-col> -->
         </el-row>
     </div>
 </template>
@@ -49,24 +46,49 @@ export default {
 }
 </script>
 <style scoped>
+.add-el-card {
+  width: 350px;
+  float: left;
+  margin: 20px;
+}
+.add-button {
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+
+.add-button-wrapper {
+  position: relative;
+  top: calc(50% - 15px);
+  text-align: center;
+}
 .el-card {
   width: 350px;
   float: left;
   margin: 20px;
 }
 
-.title {
-  position: absolute;
-  top: 50%;
-  /* text-align:center */
+.title-wrapper {
+  height: 150px;
 }
 
-.button {
+.img-wrapper {
+  text-align: center;
+}
+
+.title {
+  position: relative;
+  top: 50%;
+  text-align: center;
+}
+
+.button-wrapper {
   padding: 0;
   border: 1px solid rgba(128, 128, 128, 0.096);
+  text-align: center;
 }
 .image {
-  height: 150px;
+  /* height: 150px; */
   width: 150px;
 }
 </style>
