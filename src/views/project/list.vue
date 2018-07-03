@@ -3,7 +3,7 @@
         <el-row>
             <el-card :body-style="{ padding: '0px',height:'195px'}" class="add-el-card">
                 <div class="add-button-wrapper">
-                    <el-button type="text" class="add-button" @click="openAddProjectDialog">添加</el-button>
+                    <el-button type="text" class="add-button" @click="openAddDialog">添加</el-button>
                 </div>
             </el-card>
             <div v-for="project in projects">
@@ -40,7 +40,7 @@
                         <el-input v-model="addProjectModel.name" auto-complete="off"></el-input>
                     </el-form-item>
                     <el-form-item label="描述" :label-width="formLabelWidth" prop='desc'>
-                        <el-input type="desc" v-model="addProjectModel.desc" auto-complete="off"></el-input>
+                        <el-input v-model="addProjectModel.desc" auto-complete="off"></el-input>
                     </el-form-item>
                     <el-form-item label="模板" :label-width="formLabelWidth" prop='templateId'>
                         <el-input v-model="addProjectModel.templateId" auto-complete="off"></el-input>
@@ -124,7 +124,7 @@ export default {
         }
       })
     },
-    openAddProjectDialog() {
+    openAddDialog() {
       this.addDialogFormVisible = true
       resetForm(this, 'addProjectForm')
     },
