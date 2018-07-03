@@ -21,7 +21,7 @@
                     <div>
                         <el-row>
                             <el-col :span=12 class="button-wrapper">
-                                <el-button type="text">设计</el-button>
+                                <el-button type="text" @click="openProjectDetail(project.id)">打开</el-button>
                             </el-col>
                             <el-col :span=12 class="button-wrapper">
                                 <el-button type="text" @click="deleteProject(project.id)">删除</el-button>
@@ -57,7 +57,7 @@
 <script>
 import cloud from '@/assets/cloud.png'
 import { _getProjectList, _addProject, _deleteProject } from '@/api/project'
-import { deepCopy, showMsg, showConfirmMsg, resetForm } from '@/utils/index'
+import { showMsg, showConfirmMsg, resetForm } from '@/utils/index'
 export default {
   created() {
     this.getProjectList()
@@ -151,6 +151,9 @@ export default {
         .catch(error => {
           console.log(error)
         })
+    },
+    openProjectDetail(projectId) {
+      this.$router.push({ path: '/project/detail?projectId=' + projectId })
     }
   }
 }

@@ -80,6 +80,29 @@ export const constantRouterMap = [
     ],
     permission: 'role'
   },
+  {
+    path: '/project',
+    component: Layout,
+    name: '项目管理下级页面',
+    children: [
+      {
+        path: 'builder',
+        name: 'builder',
+        component: () => import('@/views/builder/index'),
+        meta: { title: '构建页面', icon: 'example' },
+        hidden: true
+      },
+      {
+        path: 'detail',
+        name: 'detail',
+        component: () => import('@/views/project/detail'),
+        meta: { title: '项目详情', icon: 'example' },
+        hidden: true
+      }
+    ],
+    permission: 'role',
+    hidden: true
+  },
   // {
   //   path: '/shop',
   //   component: Layout,
@@ -117,6 +140,7 @@ export const constantRouterMap = [
         name: 'builder',
         component: () => import('@/views/builder/index'),
         meta: { title: '构建页面', icon: 'example' }
+        // hidden: true
       },
       {
         path: 'test4',
