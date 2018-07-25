@@ -1,8 +1,8 @@
 import request from '@/utils/request'
 
-export function _getPageList(params) {
+export function _getPageList(projectId, params) {
   return request({
-    url: '/api/app/page/list',
+    url: '/api/app/' + projectId + '/page/list',
     method: 'get',
     params
   })

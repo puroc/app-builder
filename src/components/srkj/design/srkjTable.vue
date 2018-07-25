@@ -62,6 +62,7 @@ export default {
       this.style = this.componentsStyles[this.params.componentId]
     },
     getData() {
+      // {"tableData":[{"a": "1","b": "2"}]}
       if (this.componentsDatas[this.params.componentId].tableData) {
         this.datas.tableData = this.componentsDatas[this.params.componentId].tableData
       }

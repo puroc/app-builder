@@ -58,6 +58,7 @@ export default {
     // 保存当前组件设置的数据
     save() {
       const component = { componentId: this.currentComponent.componentId }
+      // this.model.datas例子：{"tableData":[{"a": "1","b": "2"}]}
       if (this.model.datas) {
         component.datas = JSON.parse(this.model.datas)
         this.$store.dispatch('setComponentDatas', component)

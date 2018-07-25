@@ -36,8 +36,8 @@
             <br/>
             <div>
                 <el-form :model="addProjectModel" :rules="validateProjectRules" ref="addProjectForm">
-                    <el-form-item label="名称" :label-width="formLabelWidth" prop='name'>
-                        <el-input v-model="addProjectModel.name" auto-complete="off"></el-input>
+                    <el-form-item label="名称" :label-width="formLabelWidth" prop='name' >
+                        <el-input v-model="addProjectModel.name" auto-complete="off" placeholder="只能包含字母数字和下划线"></el-input>
                     </el-form-item>
                     <el-form-item label="描述" :label-width="formLabelWidth" prop='desc'>
                         <el-input v-model="addProjectModel.desc" auto-complete="off"></el-input>
@@ -67,14 +67,7 @@ export default {
       if (new RegExp('^\\w+$').test(value)) {
         callback()
       } else {
-        callback(new Error('工程名只能包含字母数字和下划线'))
-      }
-    }
-    const validateProjectDesc = (rule, value, callback) => {
-      if (new RegExp('^[\u4e00-\u9fa5]*$').test(value)) {
-        callback()
-      } else {
-        callback(new Error('工程描述只能包含中文'))
+        callback(new Error('只能包含字母数字和下划线'))
       }
     }
     return {
@@ -94,10 +87,16 @@ export default {
         desc: [
           {
             required: true,
-            trigger: 'blur',
-            validator: validateProjectDesc
+            trigger: 'blur'
+          }
+        ],
+        templateId: [
+          {
+            required: true,
+            trigger: 'blur'
           }
         ]
+
       },
       formLabelWidth: '70px'
     }
