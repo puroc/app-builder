@@ -1,4 +1,6 @@
-import { getCurrentTime } from '@/utils'
+import {
+  getCurrentTime
+} from '@/utils'
 
 const builder = {
   state: {
@@ -60,9 +62,6 @@ const builder = {
       const componentId = component.componentId
       const componentName = component.componentName
       const componentType = component.componentType
-      const params = component.params
-      const attributes = component.attributes
-      const datas = component.datas
 
       // 若该布局不存在，则创建一个布局对象
       if (!state.componentsLayouts[rowId]) {
@@ -82,14 +81,47 @@ const builder = {
         state.componentsLayouts[rowId][colId].push(ele)
 
         // 存储组件的参数
-        state.componentsParams[componentId] = params
+        state.componentsParams[componentId] = component.params
 
         // 存储组件的属性
-        state.componentsAttributes[componentId] = attributes
+        state.componentsAttributes[componentId] = component.attributes
 
         // 存储组件的数据
-        state.componentsDatas[componentId] = datas
+        state.componentsDatas[componentId] = component.datas
+
+        // 存储组件的样式
+        state.componentsDatas[componentId] = component.styles
+
+        // 存储组件的事件
+        state.componentsDatas[componentId] = component.events
+
+        // 存储组件的代码
+        state.componentsDatas[componentId] = component.codes
       }
+    },
+    LOAD_COMPONENTS: (state, component) => {
+      const componentId = component.componentId
+
+      // 存储组件的布局
+      state.componentsParams[componentId] = component.layout
+
+      // 存储组件的参数
+      state.componentsParams[componentId] = component.params
+
+      // 存储组件的属性
+      state.componentsAttributes[componentId] = component.attributes
+
+      // 存储组件的数据
+      state.componentsDatas[componentId] = component.datas
+
+      // 存储组件的样式
+      state.componentsDatas[componentId] = component.styles
+
+      // 存储组件的事件
+      state.componentsDatas[componentId] = component.events
+
+      // 存储组件的代码
+      state.componentsDatas[componentId] = component.codes
     },
     // 设置当前选择的组件
     SET_CURRENT_COMPONENT: (state, component) => {
@@ -170,20 +202,36 @@ const builder = {
     }
   },
   actions: {
-    addComponents: ({ commit }, component) => {
+    addComponents: ({
+      commit
+    }, component) => {
       commit('ADD_COMPONENTS', component)
       // 属性发生变化时，更新state.time，以便组件watch，及时更新组件的属性
       commit('UPDATE_TIME')
     },
-    setCurrentComponent: ({ commit }, component) => {
+    loadComponent: ({
+      commit
+    }, component) => {
+      commit('LOAD_COMPONENTS', component)
+      // 属性发生变化时，更新state.time，以便组件watch，及时更新组件的属性
+      commit('UPDATE_TIME')
+    },
+    setCurrentComponent: ({
+      commit
+    }, component) => {
       commit('SET_CURRENT_COMPONENT', component)
     },
-    setComponentAttributes: ({ commit }, component) => {
+    setComponentAttributes: ({
+      commit
+    }, component) => {
       commit('SET_COMPONENT_ATTRIBUTES', component)
       // 属性发生变化时，更新state.time，以便组件watch，及时更新组件的属性
       commit('UPDATE_TIME')
     },
-    deleteComponent: ({ commit, state }, list) => {
+    deleteComponent: ({
+      commit,
+      state
+    }, list) => {
       list.forEach(componentId => {
         commit('DELETE_COMPONENT_LAYOUT', componentId)
         commit('DELETE_COMPONENT_ATTRIBUTES', componentId)
@@ -196,30 +244,44 @@ const builder = {
       // 删除组件时，更新state.time，以便布局组件watch，及时更新布局中的组件
       commit('UPDATE_TIME')
     },
-    deleteLayout: ({ commit }, list) => {
+    deleteLayout: ({
+      commit
+    }, list) => {
       list.forEach(componentId => {
         commit('DELETE_COMPONENT_LAYOUT_SELF', componentId)
       })
       commit('UPDATE_TIME')
     },
-    moveComponent: ({ commit }, componentId) => {
+    moveComponent: ({
+      commit
+    }, componentId) => {
       commit('DELETE_COMPONENT_LAYOUT', componentId)
       // 移动组件时，更新state.time，以便布局组件watch，及时更新布局中的组件
       commit('UPDATE_TIME')
     },
-    setComponentStyles: ({ commit }, component) => {
+    setComponentStyles: ({
+      commit
+    }, component) => {
       commit('SET_COMPONENT_STYLES', component)
     },
-    setComponentParams: ({ commit }, component) => {
+    setComponentParams: ({
+      commit
+    }, component) => {
       commit('SET_COMPONENT_PARAMS', component)
     },
-    setComponentDatas: ({ commit }, component) => {
+    setComponentDatas: ({
+      commit
+    }, component) => {
       commit('SET_COMPONENT_DATAS', component)
     },
-    setComponentEvents: ({ commit }, component) => {
+    setComponentEvents: ({
+      commit
+    }, component) => {
       commit('SET_COMPONENT_EVENTS', component)
     },
-    setComponentCodes: ({ commit }, component) => {
+    setComponentCodes: ({
+      commit
+    }, component) => {
       commit('SET_COMPONENT_CODES', component)
     }
   }
