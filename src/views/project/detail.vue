@@ -148,8 +148,9 @@ export default {
       this.$refs.editPageForm.validate(valid => {
         if (valid) {
           const page = this.editUserModel
-          page.projectId = this.$route.query.projectId
-          _editPage(page)
+          const projectId = this.$route.query.projectId
+          page.projectId = projectId
+          _editPage(page.projectId, page)
             .then(response => {
               if (response.data.resultCode === '1') {
                 showMsg(this, 'success', '编辑成功')
@@ -170,7 +171,8 @@ export default {
     deletePage(row) {
       showConfirmMsg(this, '此操作将永久删除该页面, 是否继续?')
         .then(() => {
-          _deletePage(row.id)
+          const projectId = this.$route.query.projectId
+          _deletePage(projectId, row.id)
             .then(() => {
               this.getPageList()
             })
@@ -198,8 +200,9 @@ export default {
       this.$refs.addPageForm.validate(valid => {
         if (valid) {
           const page = deepCopy(this.addPageModel)
-          page.projectId = this.$route.query.projectId
-          _addPage(page)
+          const projectId = this.$route.query.projectId
+          page.projectId = projectId
+          _addPage(page.projectId, page)
             .then(response => {
               if (response.data.resultCode === '1') {
                 showMsg(this, 'success', '添加成功')
