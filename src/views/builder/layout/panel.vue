@@ -22,6 +22,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import { getBus } from '@/utils/bus'
+import { _savePageComponents } from '@/api/page'
 export default {
   computed: {
     ...mapGetters([
@@ -51,19 +52,27 @@ export default {
       )
     },
     upload() {
+      const projectId = this.$route.query.projectId
+      const pageId = this.$route.query.pageId
       const result = { components: [] }
-      for (const item in this.componentsLayouts) {
-        result.components[item] = {}
-        result.components[item].layout = this.componentsLayouts[item]
-        result.components[item].attributes = this.componentsAttributes[item]
-        result.components[item].params = this.componentsParams[item]
-        result.components[item].attributes = this.componentsAttributes[item]
-        result.components[item].styles = this.componentsStyles[item]
-        result.components[item].datas = this.componentsDatas[item]
-        result.components[item].events = this.componentsEvents[item]
-        result.components[item].codes = this.componentsCodes[item]
+      for (const componentId in this.componentsLayouts) {
+        const component = {}
+        component.id = componentId
+        component.name = this.componentsParams[componentId] ? this.componentsParams[componentId].componentName : ''
+        component.type = this.componentsParams[componentId] ? this.componentsParams[componentId].componentType : ''
+        component.pageId = pageId
+        component.layout = this.componentsLayouts[componentId]
+        component.attributes = this.componentsAttributes[componentId]
+        component.params = this.componentsParams[componentId]
+        component.attributes = this.componentsAttributes[componentId]
+        component.styles = this.componentsStyles[componentId]
+        component.datas = this.componentsDatas[componentId]
+        component.events = this.componentsEvents[componentId]
+        component.codes = this.componentsCodes[componentId]
+        result.components.push(component)
       }
       console.log(result)
+      _savePageComponents(projectId, pageId, result.components)
       // console.log('[componentsParams]:' + JSON.stringify(this.componentsParams))
       // console.log('[componentsAttributes]:' + JSON.stringify(this.componentsAttributes))
       // console.log('[componentsLayouts]:' + JSON.stringify(this.componentsLayouts))

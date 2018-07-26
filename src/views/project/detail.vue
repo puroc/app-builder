@@ -99,6 +99,7 @@ export default {
       addDialogFormVisible: false,
       editDialogFormVisible: false,
       editable: true,
+      batchDeletePageList: [],
       validatePageRules: {
         name: [
           {
@@ -127,13 +128,21 @@ export default {
   created() {
     this.getPageList()
   },
+  computed: {
+    projectId() {
+      return this.$route.query.projectId
+    }
+  },
   methods: {
     handleSelectionChange(pageList) {
       this.batchDeletePageList = pageList
     },
     openPageBuilder(row) {
       const pageId = row.id
-      this.$router.push({ path: '/project/builder?pageId=' + pageId })
+      // const projectId = this.$route.query.projectId
+      this.$router.push({
+        path: '/project/builder?projectId=' + this.projectId + '&pageId=' + pageId
+      })
     },
     switchToEdit() {
       this.editable = !this.editable
@@ -148,8 +157,8 @@ export default {
       this.$refs.editPageForm.validate(valid => {
         if (valid) {
           const page = this.editUserModel
-          const projectId = this.$route.query.projectId
-          page.projectId = projectId
+          // const projectId = this.$route.query.projectId
+          page.projectId = this.projectId
           _editPage(page.projectId, page)
             .then(response => {
               if (response.data.resultCode === '1') {
@@ -171,8 +180,8 @@ export default {
     deletePage(row) {
       showConfirmMsg(this, '此操作将永久删除该页面, 是否继续?')
         .then(() => {
-          const projectId = this.$route.query.projectId
-          _deletePage(projectId, row.id)
+          // const projectId = this.$route.query.projectId
+          _deletePage(this.projectId, row.id)
             .then(() => {
               this.getPageList()
             })
@@ -200,8 +209,8 @@ export default {
       this.$refs.addPageForm.validate(valid => {
         if (valid) {
           const page = deepCopy(this.addPageModel)
-          const projectId = this.$route.query.projectId
-          page.projectId = projectId
+          // const projectId = this.$route.query.projectId
+          page.projectId = this.projectId
           _addPage(page.projectId, page)
             .then(response => {
               if (response.data.resultCode === '1') {
@@ -236,7 +245,7 @@ export default {
     batchDeletePages() {
       showConfirmMsg(this, '此操作将永久删除该页面, 是否继续?')
         .then(() => {
-          _deletePageList(this.batchDeletePageList)
+          _deletePageList(this.projectId, this.batchDeletePageList)
             .then(() => {
               this.getPageList()
             })

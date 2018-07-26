@@ -35,12 +35,30 @@ export function _editPage(projectId, payloads) {
   })
 }
 
-export function _deletePageList(pageList) {
+export function _deletePageList(projectId, pageList) {
   return request({
-    url: '/api/app/page',
+    url: '/api/app/' + projectId + '/page',
     method: 'delete',
     data: {
       payloads: pageList
+    }
+  })
+}
+
+export function _getComponents(projectId, pageId, params) {
+  return request({
+    url: '/api/app/' + projectId + '/' + pageId + '/page/list',
+    method: 'get',
+    params
+  })
+}
+
+export function _savePageComponents(projectId, pageId, components) {
+  return request({
+    url: '/api/app/' + projectId + '/' + pageId + '/page/components',
+    method: 'post',
+    data: {
+      payloads: components
     }
   })
 }
