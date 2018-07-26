@@ -4,6 +4,7 @@
   </div>
 </template>
 <script>
+import { _loadComponent } from '@/api/page'
 export default {
   computed: {
     componentName() {
@@ -14,6 +15,12 @@ export default {
     },
     componentType() {
       return 'srkj-layout'
+    },
+    projectId() {
+      return this.$route.query.projectId
+    },
+    pageId() {
+      return this.$route.query.pageId
     },
     params() {
       const params = {}
@@ -30,6 +37,10 @@ export default {
     }
   },
   created() {
+    // 打开一个页面进行设计时，先清除builder store中的旧数据
+    this.$store.dispatch('cleanBuilderStoreData')
+
+    // 添加预置组件preview-main-row
     this.$store.dispatch('addComponents', {
       rowId: 'preview-init-row',
       colId: 0,
@@ -38,12 +49,19 @@ export default {
       componentType: this.componentType,
       params: this.params,
       attributes: this.attributes
+    }).then(respones => {
+      // 从服务端获取该页面的组件
+      _loadComponent(this.projectId, this.pageId).then(response => {
+        const components = response.data.payloads
+        this.$store.dispatch('loadComponent', components).then(response => {
+          this.$store.dispatch('updateLoadTime')
+        }).catch(error => {
+          console.log(error)
+        })
+      }).catch(error => {
+        console.log(error)
+      })
     })
-
-    // this.$store.dispatch('addComponents', {
-    //   rowId: 'preview-main-row',
-    //   colId: 0
-    // })
 
     // 设置当前组件为刚拖拽过来的组件
     this.$store.dispatch('setCurrentComponent', {

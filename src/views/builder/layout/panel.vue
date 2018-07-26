@@ -55,9 +55,9 @@ export default {
       const projectId = this.$route.query.projectId
       const pageId = this.$route.query.pageId
       const result = { components: [] }
-      for (const componentId in this.componentsLayouts) {
+      for (const componentId in this.componentsParams) {
         const component = {}
-        component.id = componentId
+        component.componentId = componentId
         component.name = this.componentsParams[componentId] ? this.componentsParams[componentId].componentName : ''
         component.type = this.componentsParams[componentId] ? this.componentsParams[componentId].componentType : ''
         component.pageId = pageId

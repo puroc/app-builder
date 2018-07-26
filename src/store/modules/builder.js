@@ -5,6 +5,7 @@ import {
 const builder = {
   state: {
     time: {},
+    loadTime: {},
     currentComponent: '',
     componentsParams: {},
     // componentsParams: {
@@ -90,38 +91,43 @@ const builder = {
         state.componentsDatas[componentId] = component.datas
 
         // 存储组件的样式
-        state.componentsDatas[componentId] = component.styles
+        state.componentsStyles[componentId] = component.styles
 
         // 存储组件的事件
-        state.componentsDatas[componentId] = component.events
+        state.componentsEvents[componentId] = component.events
 
         // 存储组件的代码
-        state.componentsDatas[componentId] = component.codes
+        state.componentsCodes[componentId] = component.codes
       }
     },
-    LOAD_COMPONENTS: (state, component) => {
-      const componentId = component.componentId
+    LOAD_COMPONENTS: (state, components) => {
+      for (const item in components) {
+        const component = components[item]
+        const componentId = component.componentId
 
-      // 存储组件的布局
-      state.componentsParams[componentId] = component.layout
+        // 存储组件的布局
+        state.componentsLayouts[componentId] = component.layout ? JSON.parse(component.layout) : {}
 
-      // 存储组件的参数
-      state.componentsParams[componentId] = component.params
+        // 存储组件的参数
+        state.componentsParams[componentId] = component.params ? JSON.parse(component.params) : {}
 
-      // 存储组件的属性
-      state.componentsAttributes[componentId] = component.attributes
+        // 存储组件的属性
+        state.componentsAttributes[componentId] = component.attributes ? JSON.parse(component.attributes) : {}
 
-      // 存储组件的数据
-      state.componentsDatas[componentId] = component.datas
+        // 存储组件的数据
+        state.componentsDatas[componentId] = component.datas ? JSON.parse(component.datas) : {}
 
-      // 存储组件的样式
-      state.componentsDatas[componentId] = component.styles
+        // 存储组件的样式
+        state.componentsStyles[componentId] = component.styles ? JSON.parse(component.styles) : {}
 
-      // 存储组件的事件
-      state.componentsDatas[componentId] = component.events
+        // 存储组件的事件
+        state.componentsEvents[componentId] = component.events ? JSON.parse(component.events) : {}
 
-      // 存储组件的代码
-      state.componentsDatas[componentId] = component.codes
+        // 存储组件的代码
+        state.componentsCodes[componentId] = component.codes ? JSON.parse(component.codes) : {}
+
+        // state.loadTime = getCurrentTime()
+      }
     },
     // 设置当前选择的组件
     SET_CURRENT_COMPONENT: (state, component) => {
@@ -185,6 +191,9 @@ const builder = {
     UPDATE_TIME: state => {
       state.time = getCurrentTime()
     },
+    UPDATE_LOAD_TIME: state => {
+      state.loadTime = getCurrentTime()
+    },
     SET_COMPONENT_STYLES: (state, component) => {
       state.componentsStyles[component.componentId] = component.styles
     },
@@ -199,6 +208,16 @@ const builder = {
     },
     SET_COMPONENT_CODES: (state, component) => {
       state.componentsCodes[component.componentId] = component.codes
+    },
+    CLEAN_BUILDER_STORE_DATA: (state) => {
+      state.currentComponent = ''
+      state.componentsParams = {}
+      state.componentsAttributes = {}
+      state.componentsLayouts = {}
+      state.componentsStyles = {}
+      state.componentsDatas = {}
+      state.componentsEvents = {}
+      state.componentsCodes = {}
     }
   },
   actions: {
@@ -211,10 +230,8 @@ const builder = {
     },
     loadComponent: ({
       commit
-    }, component) => {
-      commit('LOAD_COMPONENTS', component)
-      // 属性发生变化时，更新state.time，以便组件watch，及时更新组件的属性
-      commit('UPDATE_TIME')
+    }, components) => {
+      commit('LOAD_COMPONENTS', components)
     },
     setCurrentComponent: ({
       commit
@@ -227,6 +244,18 @@ const builder = {
       commit('SET_COMPONENT_ATTRIBUTES', component)
       // 属性发生变化时，更新state.time，以便组件watch，及时更新组件的属性
       commit('UPDATE_TIME')
+    },
+    updateTime: ({
+      commit
+    }) => {
+      // 属性发生变化时，更新state.time，以便组件watch，及时更新组件的属性
+      commit('UPDATE_TIME')
+    },
+    updateLoadTime: ({
+      commit
+    }) => {
+      // 页面加载完组件时，更新state.loadTime
+      commit('UPDATE_LOAD_TIME')
     },
     deleteComponent: ({
       commit,
@@ -283,6 +312,11 @@ const builder = {
       commit
     }, component) => {
       commit('SET_COMPONENT_CODES', component)
+    },
+    cleanBuilderStoreData: ({
+      commit
+    }) => {
+      commit('CLEAN_BUILDER_STORE_DATA')
     }
   }
 }

@@ -16,7 +16,8 @@ const getters = {
   componentsEvents: state => state.builder.componentsEvents,
   componentsCodes: state => state.builder.componentsCodes,
   currentComponent: state => state.builder.currentComponent,
-  time: state => state.builder.time
+  time: state => state.builder.time,
+  loadTime: state => state.builder.loadTime
 
 }
 export default getters

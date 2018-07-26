@@ -20,10 +20,14 @@ export default {
       'componentsStyles',
       'currentComponent',
       'componentsDatas',
-      'time'
+      'time',
+      'loadTime'
     ]),
     watchObj() {
       return this.time
+    },
+    watchLoadTime() {
+      return this.loadTime
     }
   },
   data() {
@@ -43,7 +47,12 @@ export default {
         this.refresh()
       }
     },
+    // 当store中的有数据变化时，重新获取该布局的组件列表
     watchObj: function() {
+      this.refresh()
+    },
+    // 从页面获取组件数据后，重新获取该布局的组件列表
+    watchLoadTime: function() {
       this.refresh()
     }
   },
@@ -73,6 +82,7 @@ export default {
         const col = this.attributes.cols[i]
         // 若store中存在该布局的数据，则从布局中取出当前列的数据，并放到列的items中
         col.items = []
+        // console.log('haha:' + this.componentsLayouts['preview-main-row'])
         const itemsInStore = this.componentsLayouts[componentId]
           ? this.componentsLayouts[componentId][i]
             ? this.componentsLayouts[componentId][i]
