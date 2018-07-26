@@ -73,13 +73,6 @@ export default {
       }
       console.log(result)
       _savePageComponents(projectId, pageId, result.components)
-      // console.log('[componentsParams]:' + JSON.stringify(this.componentsParams))
-      // console.log('[componentsAttributes]:' + JSON.stringify(this.componentsAttributes))
-      // console.log('[componentsLayouts]:' + JSON.stringify(this.componentsLayouts))
-      // console.log('[componentsStyles]:' + JSON.stringify(this.componentsStyles))
-      // console.log('[componentsDatas]:' + JSON.stringify(this.componentsDatas))
-      // console.log('[componentsEvents]:' + JSON.stringify(this.componentsEvents))
-      // console.log('[componentsCodes]:' + JSON.stringify(this.componentsCodes))
     }
   }
 }
