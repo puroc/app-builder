@@ -99,7 +99,7 @@
   </div>
 </template>
 <script>
-import { _getRoleListByOrgId } from '@/api/org'
+import { _getRoleListByOrgId } from '@/api/role'
 import { _getPermissions } from '@/api/permission'
 import { _deleteRole, _editRole, _addRole, _deleteRoleList } from '@/api/role'
 import { deepCopy, showMsg, showConfirmMsg, resetForm } from '@/utils/index'

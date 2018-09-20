@@ -1,4 +1,4 @@
-import { _getUserListByOrgId } from '@/api/org'
+import { _getUserListByOrgId } from '@/api/user'
 import { _deleteUser, _editUser, _addUser, _deleteUserList } from '@/api/user'
 import { deepCopy, showMsg, showConfirmMsg, resetForm } from '@/utils/index'
 import { mapGetters } from 'vuex'

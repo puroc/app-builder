@@ -24,22 +24,42 @@ export function _editUser(user) {
   })
 }
 
+// export function _addUser(user) {
+//   return request({
+//     url: '/api/idm/user',
+//     method: 'post',
+//     data: {
+//       payloads: [
+//         {
+//           username: user.username,
+//           name: user.name,
+//           password: user.password,
+//           phone: user.phone,
+//           email: user.email,
+//           orgId: user.orgId
+//         }
+//       ]
+//     }
+//   })
+// }
+
 export function _addUser(user) {
   return request({
     url: '/api/idm/user',
     method: 'post',
     data: {
       payloads: [
-        {
-          username: user.username,
-          name: user.name,
-          password: user.password,
-          phone: user.phone,
-          email: user.email,
-          orgId: user.orgId
-        }
+        user
       ]
     }
+  })
+}
+
+export function _getUserListByOrgId(orgId, params) {
+  return request({
+    url: '/api/idm/org/' + orgId + '/users',
+    method: 'get',
+    params
   })
 }
 

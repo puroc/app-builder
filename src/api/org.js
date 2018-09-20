@@ -1,21 +1,5 @@
 import request from '@/utils/request'
 
-export function _getUserListByOrgId(orgId, params) {
-  return request({
-    url: '/api/idm/org/' + orgId + '/users',
-    method: 'get',
-    params
-  })
-}
-
-export function _getRoleListByOrgId(orgId, params) {
-  return request({
-    url: '/api/idm/org/' + orgId + '/roles',
-    method: 'get',
-    params
-  })
-}
-
 export function _getOrgTree(orgId) {
   return request({
     url: '/api/idm/org/' + orgId + '/tree',

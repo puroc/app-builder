@@ -25,6 +25,14 @@ export function _editRole(role) {
   })
 }
 
+export function _getRoleListByOrgId(orgId, params) {
+  return request({
+    url: '/api/idm/org/' + orgId + '/roles',
+    method: 'get',
+    params
+  })
+}
+
 export function _addRole(role) {
   return request({
     url: '/api/idm/role',
