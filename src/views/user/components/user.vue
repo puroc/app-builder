@@ -107,62 +107,69 @@
 
   </div>
 </template>
+
 <script>
-import { _getUserListByOrgId } from "@/api/user";
-import { _getRoleListByOrgId } from "@/api/role";
-import { _deleteUser, _editUser, _addUser, _deleteUserList } from "@/api/user";
-import { deepCopy, showMsg, showConfirmMsg, resetForm } from "@/utils/index";
-import { mapGetters } from "vuex";
-import Store from "@/store";
+import { _getUserListByOrgId } from '@/api/user'
+import { _getRoleListByOrgId } from '@/api/role'
+import { _deleteUser, _editUser, _addUser, _deleteUserList } from '@/api/user'
+import { deepCopy, showMsg, showConfirmMsg, resetForm } from '@/utils/index'
+import { mapGetters } from 'vuex'
+import Store from '@/store'
 export default {
   data() {
     const validateUsername = (rule, value, callback) => {
-      if (new RegExp("^\\w+$").test(value)) {
-        callback();
+      if (new RegExp('^\\w+$').test(value)) {
+        callback()
       } else {
-        callback(new Error("用户名只能包含字母数字和下划线"));
+        callback(new Error('用户名只能包含字母数字和下划线'))
       }
-    };
+    }
 
     const validatePassword = (rule, value, callback) => {
-      if (new RegExp("^\\w+$").test(value)) {
-        callback();
+      if (new RegExp('^\\w+$').test(value)) {
+        callback()
       } else {
-        callback(new Error("密码只能包含字母数字和下划线"));
+        callback(new Error('密码只能包含字母数字和下划线'))
       }
-    };
+    }
 
     const validateName = (rule, value, callback) => {
-      if (new RegExp("^[\u4e00-\u9fa5]*$").test(value)) {
-        callback();
+      if (new RegExp('^[\u4e00-\u9fa5]*$').test(value)) {
+        callback()
       } else {
-        callback(new Error("姓名只能包含中文"));
+        callback(new Error('姓名只能包含中文'))
       }
-    };
+    }
 
     const validatePhone = (rule, value, callback) => {
+      if (!value) {
+        callback()
+      }
       if (
         new RegExp(
-          "^((13[0-9])|(14[0-9])|(15[0-9])|(17[0-9])|(18[0-9]))\\d{8}$"
+          '^((13[0-9])|(14[0-9])|(15[0-9])|(17[0-9])|(18[0-9]))\\d{8}$'
         ).test(value)
       ) {
-        callback();
+        callback()
       } else {
-        callback(new Error("请输入正确的手机号"));
+        callback(new Error('请输入正确的手机号'))
       }
-    };
+    }
 
     const validateEmail = (rule, value, callback) => {
+      if (!value) {
+        callback()
+      }
       if (
-        new RegExp("^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+$").test(
+        new RegExp('^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+$').test(
           value
         )
       ) {
-        callback();
+        callback()
       } else {
-        callback(new Error("请输入正确的邮箱"));
+        callback(new Error('请输入正确的邮箱'))
       }
-    };
+    }
 
     return {
       storeState: Store.state,
@@ -182,73 +189,73 @@ export default {
       addUserModel: {
         bindedRoles: []
       },
-      searchInputModel: "",
-      searchSelectModel: "name",
-      formLabelWidth: "70px",
+      searchInputModel: '',
+      searchSelectModel: 'name',
+      formLabelWidth: '70px',
       editable: true,
       batchDeleteUserList: [],
       validateUserRules: {
         username: [
           {
             required: true,
-            trigger: "blur",
+            trigger: 'blur',
             validator: validateUsername
           }
         ],
         password: [
           {
             required: true,
-            trigger: "blur",
+            trigger: 'blur',
             validator: validatePassword
           },
           {
             min: 3,
             max: 6,
-            message: "密码长度在 3 到 6 个字符",
-            trigger: "blur"
+            message: '密码长度在 3 到 6 个字符',
+            trigger: 'blur'
           }
         ],
         name: [
           {
             required: true,
-            trigger: "blur",
+            trigger: 'blur',
             validator: validateName
           }
         ],
         orgId: [
           {
             required: true,
-            trigger: "blur"
+            trigger: 'blur'
           }
         ],
         phone: [
           {
             required: false,
-            trigger: "blur",
+            trigger: 'change',
             validator: validatePhone
           }
         ],
         email: [
           {
             required: false,
-            trigger: "blur",
+            trigger: 'change',
             validator: validateEmail
           }
         ]
       }
-    };
+    }
   },
   computed: {
-    ...mapGetters(["currentOrg"])
+    ...mapGetters(['currentOrg'])
   },
   created() {
-    this.getUserList();
-    this.getRoleOfCurrentOrg();
+    this.getUserList()
+    this.getRoleOfCurrentOrg()
   },
   watch: {
     // 观察currentOrg是否变化，若变化，则根据最新的currentOrg获取用户
-    "storeState.user.currentOrg": function() {
-      this.getUserList();
+    'storeState.user.currentOrg': function() {
+      this.getUserList()
     }
   },
   methods: {
@@ -256,183 +263,183 @@ export default {
       const params = {
         current: this.currentPage === 1 ? 0 : this.currentPage * this.pageSize,
         size: this.pageSize
-      };
+      }
       _getUserListByOrgId(this.currentOrg.id, params)
         .then(response => {
-          this.users = response.data.payloads;
-          this.totalRecord = response.data.totalNum;
+          this.users = response.data.payloads
+          this.totalRecord = response.data.totalNum
         })
         .catch(error => {
-          console.log(error);
-        });
+          console.log(error)
+        })
     },
     switchToEdit() {
-      this.editable = !this.editable;
+      this.editable = !this.editable
     },
     editUser() {
       this.$refs.editUserForm.validate(valid => {
         if (valid) {
           _editUser(this.editUserModel)
             .then(response => {
-              if (response.data.resultCode === "1") {
-                this.getUserList();
-                showMsg(this, "success", "修改成功");
+              if (response.data.resultCode === '1') {
+                this.getUserList()
+                showMsg(this, 'success', '修改成功')
               } else {
-                showMsg(this, "error", "修改失败");
+                showMsg(this, 'error', '修改失败')
               }
             })
             .catch(error => {
-              console.log(error);
-            });
+              console.log(error)
+            })
         } else {
-          return false;
+          return false
         }
-      });
-      this.editDialogFormVisible = false;
+      })
+      this.editDialogFormVisible = false
     },
     deleteUser(row) {
-      showConfirmMsg(this, "此操作将永久删除该用户, 是否继续?")
+      showConfirmMsg(this, '此操作将永久删除该用户, 是否继续?')
         .then(() => {
           _deleteUser(row)
             .then(response => {
-              if (response.data.resultCode === "1") {
-                showMsg(this, "success", "删除成功");
+              if (response.data.resultCode === '1') {
+                showMsg(this, 'success', '删除成功')
               } else {
-                showMsg(this, "error", "删除失败");
+                showMsg(this, 'error', '删除失败')
               }
-              this.getUserList();
+              this.getUserList()
             })
             .catch(error => {
-              console.log(error);
-            });
+              console.log(error)
+            })
         })
         .catch(() => {
-          showMsg(this, "info", "已取消删除");
-        });
+          showMsg(this, 'info', '已取消删除')
+        })
     },
     getRolesFromUserModel(model) {
-      const roles = [];
+      const roles = []
       model.bindedRoles.forEach(element => {
-        const roleObj = {};
-        roleObj.id = element;
-        roleObj.orgId = this.currentOrg.id;
-        roles.push(roleObj);
-      });
-      return roles;
+        const roleObj = {}
+        roleObj.id = element
+        roleObj.orgId = this.currentOrg.id
+        roles.push(roleObj)
+      })
+      return roles
     },
     addUser() {
       this.$refs.addUserForm.validate(valid => {
         if (valid) {
-          const user = {};
-          user.username = this.addUserModel.username;
-          user.password = this.addUserModel.password;
-          user.name = this.addUserModel.name;
-          user.phone = this.addUserModel.phone;
-          user.email = this.addUserModel.email;
-          user.orgId = this.currentOrg.id;
-          user.roles = this.getRolesFromUserModel(this.addUserModel);
+          const user = {}
+          user.username = this.addUserModel.username
+          user.password = this.addUserModel.password
+          user.name = this.addUserModel.name
+          user.phone = this.addUserModel.phone
+          user.email = this.addUserModel.email
+          user.orgId = this.currentOrg.id
+          user.roles = this.getRolesFromUserModel(this.addUserModel)
           _addUser(user)
             .then(response => {
-              if (response.data.resultCode === "1") {
-                showMsg(this, "success", "添加成功");
-                this.getUserList();
+              if (response.data.resultCode === '1') {
+                showMsg(this, 'success', '添加成功')
+                this.getUserList()
               } else {
-                showMsg(this, "error", "添加失败");
+                showMsg(this, 'error', '添加失败')
               }
             })
             .catch(error => {
-              console.log(error);
-            });
+              console.log(error)
+            })
         } else {
-          return false;
+          return false
         }
-      });
-      this.addDialogFormVisible = false;
+      })
+      this.addDialogFormVisible = false
     },
     openAddUserDialog() {
-      this.addDialogFormVisible = true;
+      this.addDialogFormVisible = true
 
-      resetForm(this, "addUserForm");
+      resetForm(this, 'addUserForm')
     },
     // 获取当前机构下的角色信息
     getRoleOfCurrentOrg() {
       const params = {
         current: 0,
         size: 0
-      };
+      }
       _getRoleListByOrgId(this.currentOrg.id, params)
         .then(response => {
-          this.rolesOfCurrentOrg = response.data.payloads;
+          this.rolesOfCurrentOrg = response.data.payloads
         })
         .catch(error => {
-          console.log(error);
-        });
+          console.log(error)
+        })
     },
     openEditUserDialog(row) {
-      this.editDialogFormVisible = true;
-      this.editUserModel = deepCopy(row);
-      this.editable = true;
+      this.editDialogFormVisible = true
+      this.editUserModel = deepCopy(row)
+      this.editable = true
     },
     handleSelectionChange(userList) {
-      this.batchDeleteUserList = userList;
+      this.batchDeleteUserList = userList
     },
     changePageNum(pageNum) {
-      this.currentPage = pageNum;
-      this.getUserList();
+      this.currentPage = pageNum
+      this.getUserList()
     },
     chanagePageSize(pageSize) {
-      this.pageSize = pageSize;
-      this.getUserList();
+      this.pageSize = pageSize
+      this.getUserList()
     },
     batchDeleteUsers() {
-      showConfirmMsg(this, "此操作将永久删除该用户, 是否继续?")
+      showConfirmMsg(this, '此操作将永久删除该用户, 是否继续?')
         .then(() => {
           _deleteUserList(this.batchDeleteUserList)
             .then(() => {
-              this.getUserList();
+              this.getUserList()
             })
             .catch(error => {
-              console.log(error);
-            });
+              console.log(error)
+            })
         })
         .catch(error => {
-          console.log(error);
-        });
+          console.log(error)
+        })
     },
     search() {
-      const key = this.searchSelectModel;
-      const value = this.searchInputModel;
-      const _this = this;
-      if (key === "name") {
-        doSearch({ name: value });
-      } else if (key === "username") {
-        doSearch({ username: value });
-      } else if (key === "email") {
-        doSearch({ email: value });
-      } else if (key === "phone") {
-        doSearch(1, { phone: value });
+      const key = this.searchSelectModel
+      const value = this.searchInputModel
+      const _this = this
+      if (key === 'name') {
+        doSearch({ name: value })
+      } else if (key === 'username') {
+        doSearch({ username: value })
+      } else if (key === 'email') {
+        doSearch({ email: value })
+      } else if (key === 'phone') {
+        doSearch(1, { phone: value })
       } else {
-        console.log("选择了错误的搜索类型");
+        console.log('选择了错误的搜索类型')
       }
       function doSearch(condition) {
         const page = {
           current:
             _this.currentPage === 1 ? 0 : _this.currentPage * _this.pageSize,
           size: _this.pageSize
-        };
-        const params = Object.assign(page, condition);
+        }
+        const params = Object.assign(page, condition)
         _getUserListByOrgId(_this.currentOrg.id, params)
           .then(response => {
-            _this.users = response.data.payloads;
-            _this.totalRecord = response.data.totalNum;
+            _this.users = response.data.payloads
+            _this.totalRecord = response.data.totalNum
           })
           .catch(error => {
-            console.log(error);
-          });
+            console.log(error)
+          })
       }
     }
   }
-};
+}
 </script>
 <style>
 .el-select .el-input {
