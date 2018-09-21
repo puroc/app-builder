@@ -118,6 +118,10 @@ import Store from '@/store'
 export default {
   data() {
     const validateUsername = (rule, value, callback) => {
+      // 姓名是非必填项，当用户没有填值的时候，默认校验通过
+      if (!value) {
+        callback()
+      }
       if (new RegExp('^\\w+$').test(value)) {
         callback()
       } else {
@@ -142,6 +146,7 @@ export default {
     }
 
     const validatePhone = (rule, value, callback) => {
+      // 手机号是非必填项，当用户没有填值的时候，默认校验通过
       if (!value) {
         callback()
       }
@@ -157,6 +162,7 @@ export default {
     }
 
     const validateEmail = (rule, value, callback) => {
+      // 邮箱是非必填项，当用户没有填值的时候，默认校验通过
       if (!value) {
         callback()
       }
@@ -197,7 +203,7 @@ export default {
       validateUserRules: {
         username: [
           {
-            required: true,
+            required: false,
             trigger: 'blur',
             validator: validateUsername
           }
@@ -358,7 +364,6 @@ export default {
     },
     openAddUserDialog() {
       this.addDialogFormVisible = true
-
       resetForm(this, 'addUserForm')
     },
     // 获取当前机构下的角色信息
