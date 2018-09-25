@@ -1,6 +1,6 @@
 import request from '@/utils/request'
-import store from '@/store'
 
+// 删除角色
 export function _deleteRole(role) {
   return request({
     url: '/api/idm/role/' + role.id,
@@ -8,24 +8,21 @@ export function _deleteRole(role) {
   })
 }
 
-export function _editRole(role) {
+// 更新角色
+export function _updateRole(role) {
   return request({
     url: '/api/idm/role/' + role.id,
     method: 'put',
     data: {
       payloads: [
-        {
-          id: role.id,
-          name: role.name,
-          orgId: store.getters.currentOrg.id,
-          permissions: role.permissions
-        }
+        role
       ]
     }
   })
 }
 
-export function _getRoleListByOrgId(orgId, params) {
+// 查询某机构下的角色
+export function _listRoleByOrgId(orgId, params) {
   return request({
     url: '/api/idm/org/' + orgId + '/roles',
     method: 'get',
@@ -33,22 +30,19 @@ export function _getRoleListByOrgId(orgId, params) {
   })
 }
 
-export function _addRole(role) {
+// 插入角色
+export function _insertRole(role) {
   return request({
     url: '/api/idm/role',
     method: 'post',
     data: {
       payloads: [
-        {
-          name: role.name,
-          orgId: store.getters.currentOrg.id,
-          permissions: role.permissions
-        }
+        role
       ]
     }
   })
 }
-
+// 批量删除角色
 export function _deleteRoleList(roleList) {
   return request({
     url: '/api/idm/role',

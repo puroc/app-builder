@@ -1,30 +1,36 @@
 import request from '@/utils/request'
 
+// 删除用户
 export function _deleteUser(user) {
   return request({
-    url: '/api/idm/user/' + user.username,
+    url: '/api/idm/user/' + user.id,
     method: 'delete'
   })
 }
 
-export function _editUser(user) {
+// 更新用户
+export function _updateUser(user) {
   return request({
-    url: '/api/idm/user/' + user.username,
+    url: '/api/idm/user/' + user.id,
     method: 'put',
     data: {
       payloads: [
-        {
-          name: user.name,
-          phone: user.phone,
-          email: user.email,
-          orgId: user.orgId
-        }
+        user
       ]
     }
   })
 }
 
-export function _addUser(user) {
+// 查询用户信息
+export function _getUser(user) {
+  return request({
+    url: '/api/idm/user/' + user.id,
+    method: 'get'
+  })
+}
+
+// 插入用户
+export function _insertUser(user) {
   return request({
     url: '/api/idm/user',
     method: 'post',
@@ -36,14 +42,16 @@ export function _addUser(user) {
   })
 }
 
-export function _getUserListByOrgId(orgId, params) {
+// 查询某机构下的用户信息
+export function _listUserByOrgId(params) {
   return request({
-    url: '/api/idm/org/' + orgId + '/users',
+    url: '/api/idm/user',
     method: 'get',
     params
   })
 }
 
+// 批量删除用户
 export function _deleteUserList(userList) {
   return request({
     url: '/api/idm/user',

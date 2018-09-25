@@ -109,9 +109,9 @@
 </template>
 
 <script>
-import { _getUserListByOrgId } from '@/api/user'
-import { _getRoleListByOrgId } from '@/api/role'
-import { _deleteUser, _editUser, _addUser, _deleteUserList } from '@/api/user'
+import { _listUserByOrgId } from '@/api/user'
+import { _listRoleByOrgId } from '@/api/role'
+import { _deleteUser, _updateUser, _insertUser, _deleteUserList } from '@/api/user'
 import { deepCopy, showMsg, showConfirmMsg, resetForm } from '@/utils/index'
 import { mapGetters } from 'vuex'
 import Store from '@/store'
@@ -267,10 +267,11 @@ export default {
   methods: {
     getUserList() {
       const params = {
+        orgId: this.currentOrg.id,
         current: this.currentPage === 1 ? 0 : this.currentPage * this.pageSize,
         size: this.pageSize
       }
-      _getUserListByOrgId(this.currentOrg.id, params)
+      _listUserByOrgId(params)
         .then(response => {
           this.users = response.data.payloads
           this.totalRecord = response.data.totalNum
@@ -285,7 +286,7 @@ export default {
     editUser() {
       this.$refs.editUserForm.validate(valid => {
         if (valid) {
-          _editUser(this.editUserModel)
+          _updateUser(this.editUserModel)
             .then(response => {
               if (response.data.resultCode === '1') {
                 this.getUserList()
@@ -344,7 +345,7 @@ export default {
           user.email = this.addUserModel.email
           user.orgId = this.currentOrg.id
           user.roles = this.getRolesFromUserModel(this.addUserModel)
-          _addUser(user)
+          _insertUser(user)
             .then(response => {
               if (response.data.resultCode === '1') {
                 showMsg(this, 'success', '添加成功')
@@ -369,10 +370,11 @@ export default {
     // 获取当前机构下的角色信息
     getRoleOfCurrentOrg() {
       const params = {
+        orgId: this.currentOrg.id,
         current: 0,
         size: 0
       }
-      _getRoleListByOrgId(this.currentOrg.id, params)
+      _listRoleByOrgId(params)
         .then(response => {
           this.rolesOfCurrentOrg = response.data.payloads
         })
@@ -428,12 +430,13 @@ export default {
       }
       function doSearch(condition) {
         const page = {
+          orgId: _this.currentOrg.id,
           current:
             _this.currentPage === 1 ? 0 : _this.currentPage * _this.pageSize,
           size: _this.pageSize
         }
         const params = Object.assign(page, condition)
-        _getUserListByOrgId(_this.currentOrg.id, params)
+        _listUserByOrgId(params)
           .then(response => {
             _this.users = response.data.payloads
             _this.totalRecord = response.data.totalNum

@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import { _getOrgTree, _addOrg, _deleteOrg } from '@/api/org'
+import { _getOrgTree, _insertOrg, _deleteOrg } from '@/api/org'
 import { resetForm } from '@/utils/index'
 import { Message } from 'element-ui'
 import { mapGetters } from 'vuex'

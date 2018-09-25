@@ -73,7 +73,7 @@ export default {
         result.components.push(component)
       }
       console.log(result)
-      _savePageComponents(projectId, pageId, result.components).then(response => {
+      _savePageComponents(pageId, result.components).then(response => {
         showMsg(this, 'success', '上传成功')
       }).catch(error => {
         console.log(error)

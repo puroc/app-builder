@@ -1,8 +1,9 @@
 import request from '@/utils/request'
 
+// 登录
 export function _login(username, password) {
   return request({
-    url: '/api/idm/user/login',
+    url: '/api/idm/login',
     method: 'post',
     data: {
       'payloads': [
@@ -15,23 +16,18 @@ export function _login(username, password) {
   })
 }
 
-export function _getInfo() {
-  return request({
-    url: '/api/idm/user/info',
-    method: 'get'
-  })
-}
-
+// 登出
 export function _logout() {
   return request({
-    url: '/api/idm/user/logout',
+    url: '/api/idm/logout',
     method: 'get'
   })
 }
 
+// 刷新token
 export function _refreshToken() {
   return request({
-    url: '/api/idm/user/token',
+    url: '/api/idm/token',
     method: 'get'
   })
 }

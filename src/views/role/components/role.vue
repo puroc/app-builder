@@ -99,9 +99,9 @@
   </div>
 </template>
 <script>
-import { _getRoleListByOrgId } from '@/api/role'
+import { _listRoleByOrgId } from '@/api/role'
 import { _getPermissions } from '@/api/permission'
-import { _deleteRole, _editRole, _addRole, _deleteRoleList } from '@/api/role'
+import { _deleteRole, _updateRole, _insertRole, _deleteRoleList } from '@/api/role'
 import { deepCopy, showMsg, showConfirmMsg, resetForm } from '@/utils/index'
 import { mapGetters } from 'vuex'
 import Store from '@/store'
@@ -172,10 +172,11 @@ export default {
     },
     getRoleList() {
       const params = {
+        orgId: this.currentOrg.id,
         current: this.currentPage === 1 ? 0 : this.currentPage * this.pageSize,
         size: this.pageSize
       }
-      _getRoleListByOrgId(this.currentOrg.id, params)
+      _listRoleByOrgId(params)
         .then(response => {
           this.roles = response.data.payloads
           this.totalRecord = response.data.totalNum
@@ -199,7 +200,7 @@ export default {
       this.$refs.editRoleForm.validate(valid => {
         if (valid) {
           this.addPermissionToRoleModel(this.bindedPermissions, this.editRoleModel)
-          _editRole(this.editRoleModel)
+          _updateRole(this.editRoleModel)
             .then(response => {
               if (response.data.resultCode === '1') {
                 this.getRoleList()
@@ -241,7 +242,7 @@ export default {
       this.$refs.addRoleForm.validate(valid => {
         if (valid) {
           this.addPermissionToRoleModel(this.bindedPermissions, this.addRoleModel)
-          _addRole(this.addRoleModel)
+          _insertRole(this.addRoleModel)
             .then(response => {
               if (response.data.resultCode === '1') {
                 showMsg(this, 'success', '添加成功')
@@ -313,12 +314,13 @@ export default {
       }
       function doSearch(condition) {
         const page = {
+          orgId: this.currentOrg.id,
           current:
             _this.currentPage === 1 ? 0 : _this.currentPage * _this.pageSize,
           size: _this.pageSize
         }
         const params = Object.assign(page, condition)
-        _getRoleListByOrgId(_this.currentOrg.id, params)
+        _listRoleByOrgId(params)
           .then(response => {
             _this.roles = response.data.payloads
             _this.totalRecord = response.data.totalNum

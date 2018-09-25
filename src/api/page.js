@@ -1,43 +1,43 @@
 import request from '@/utils/request'
 
-export function _getPageList(projectId, params) {
+export function _listPage(params) {
   return request({
-    url: '/api/app/project/' + projectId + '/page/list',
+    url: '/api/app/page',
     method: 'get',
     params
   })
 }
 
-export function _addPage(projectId, payloads) {
+export function _insertPage(page) {
   return request({
-    url: '/api/app/project/' + projectId + '/page',
+    url: '/api/app/page',
     method: 'post',
     data: {
-      payloads
+      page
     }
   })
 }
 
-export function _deletePage(projectId, pageId) {
+export function _deletePage(id) {
   return request({
-    url: '/api/app/project/' + projectId + '/page/' + pageId,
+    url: '/api/app/page/' + id,
     method: 'delete'
   })
 }
 
-export function _editPage(projectId, payloads) {
+export function _updatePage(id, page) {
   return request({
-    url: '/api/app/project/' + projectId + '/page/' + payloads.id,
+    url: '/api/app/page/' + id,
     method: 'put',
     data: {
-      payloads
+      page
     }
   })
 }
 
-export function _deletePageList(projectId, pageList) {
+export function _deletePageList(pageList) {
   return request({
-    url: '/api/app/project/' + projectId + '/page',
+    url: '/api/app/page',
     method: 'delete',
     data: {
       payloads: pageList
@@ -45,16 +45,16 @@ export function _deletePageList(projectId, pageList) {
   })
 }
 
-export function _loadComponent(projectId, pageId) {
+export function _loadComponent(id) {
   return request({
-    url: '/api/app/project/' + projectId + '/page/' + pageId + '/components',
+    url: '/api/app/page/' + id + '/components',
     method: 'get'
   })
 }
 
-export function _savePageComponents(projectId, pageId, components) {
+export function _savePageComponents(id, components) {
   return request({
-    url: '/api/app/project/' + projectId + '/page/' + pageId + '/components',
+    url: '/api/app/page/' + id + '/components',
     method: 'post',
     data: {
       payloads: components

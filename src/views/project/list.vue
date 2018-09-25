@@ -56,7 +56,7 @@
 </template>
 <script>
 import cloud from '@/assets/cloud.png'
-import { _getProjectList, _addProject, _deleteProject } from '@/api/project'
+import { _listProject, _insertProject, _deleteProject } from '@/api/project'
 import { showMsg, showConfirmMsg, resetForm } from '@/utils/index'
 export default {
   created() {
@@ -105,7 +105,7 @@ export default {
     addProject() {
       this.$refs.addProjectForm.validate(valid => {
         if (valid) {
-          _addProject(this.addProjectModel)
+          _insertProject(this.addProjectModel)
             .then(response => {
               if (response.data.resultCode === '1') {
                 showMsg(this, 'success', '添加成功')
@@ -143,7 +143,7 @@ export default {
         })
     },
     getProjectList() {
-      _getProjectList()
+      _listProject()
         .then(response => {
           this.projects = response.data.payloads
         })

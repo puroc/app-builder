@@ -1,35 +1,37 @@
 import request from '@/utils/request'
 
-export function _getProjectList() {
+// 查询某用户的机构信息
+export function _listProject() {
   return request({
     url: '/api/app/project/list',
     method: 'get'
   })
 }
-
-export function _addProject(payloads) {
+// 插入工程
+export function _insertProject(project) {
   return request({
     url: '/api/app/project',
     method: 'post',
     data: {
-      payloads
+      project
     }
   })
 }
 
-export function _deleteProject(projectId) {
+// 删除工程
+export function _deleteProject(id) {
   return request({
-    url: '/api/app/project/' + projectId,
+    url: '/api/app/project/' + id,
     method: 'delete'
   })
 }
 
-export function _editProject(projectId, payloads) {
+export function _updateProject(id, project) {
   return request({
-    url: '/api/app/project/' + projectId,
+    url: '/api/app/project/' + id,
     method: 'put',
     data: {
-      payloads
+      project
     }
   })
 }

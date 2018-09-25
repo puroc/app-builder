@@ -1,6 +1,7 @@
-import { _login, _logout, _getInfo, _refreshToken } from '@/api/login'
+import { _login, _logout, _refreshToken } from '@/api/auth'
+import { _getUser } from '@/api/user'
 import { getToken, setToken, removeToken } from '@/utils/auth'
-import { _getOrgInfo } from '@/api/org'
+import { _getOrg } from '@/api/org'
 
 const user = {
   state: {
@@ -111,7 +112,7 @@ const user = {
     // 获取用户信息
     GetInfo({ dispatch, commit }, token) {
       return new Promise((resolve, reject) => {
-        _getInfo()
+        _getUser()
           .then(response => {
             const user = response.data.payloads[0]
             commit('SET_ROLES', user.roles)

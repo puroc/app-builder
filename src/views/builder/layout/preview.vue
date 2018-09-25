@@ -51,7 +51,7 @@ export default {
       attributes: this.attributes
     }).then(respones => {
       // 从服务端获取该页面的组件
-      _loadComponent(this.projectId, this.pageId).then(response => {
+      _loadComponent(this.pageId).then(response => {
         const components = response.data.payloads
         this.$store.dispatch('loadComponent', components).then(response => {
           this.$store.dispatch('updateLoadTime')

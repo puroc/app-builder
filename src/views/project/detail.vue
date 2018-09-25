@@ -73,9 +73,9 @@
 </template>
 <script>
 import {
-  _getPageList,
-  _addPage,
-  _editPage,
+  _listPage,
+  _insertPage,
+  _updatePage,
   _deletePage,
   _deletePageList
 } from '@/api/page'
@@ -157,7 +157,7 @@ export default {
         if (valid) {
           const page = this.editUserModel
           page.projectId = this.projectId
-          _editPage(page.projectId, page)
+          _updatePage(page.projectId, page)
             .then(response => {
               if (response.data.resultCode === '1') {
                 showMsg(this, 'success', '编辑成功')
@@ -178,7 +178,7 @@ export default {
     deletePage(row) {
       showConfirmMsg(this, '此操作将永久删除该页面, 是否继续?')
         .then(() => {
-          _deletePage(this.projectId, row.id)
+          _deletePage(row.id)
             .then(() => {
               this.getPageList()
             })
@@ -207,7 +207,7 @@ export default {
         if (valid) {
           const page = deepCopy(this.addPageModel)
           page.projectId = this.projectId
-          _addPage(page.projectId, page)
+          _insertPage(page)
             .then(response => {
               if (response.data.resultCode === '1') {
                 showMsg(this, 'success', '添加成功')
@@ -230,7 +230,9 @@ export default {
         current: this.currentPage === 1 ? 0 : this.currentPage * this.pageSize,
         size: this.pageSize
       }
-      _getPageList(this.$route.query.projectId, params)
+      // 从url中获取参数
+      // this.$route.query.projectId,
+      _listPage(params)
         .then(response => {
           this.pages = response.data.payloads
         })
@@ -241,7 +243,7 @@ export default {
     batchDeletePages() {
       showConfirmMsg(this, '此操作将永久删除该页面, 是否继续?')
         .then(() => {
-          _deletePageList(this.projectId, this.batchDeletePageList)
+          _deletePageList(this.batchDeletePageList)
             .then(() => {
               this.getPageList()
             })
