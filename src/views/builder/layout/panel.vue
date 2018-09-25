@@ -53,7 +53,7 @@ export default {
       )
     },
     upload() {
-      const projectId = this.$route.query.projectId
+      // const projectId = this.$route.query.projectId
       const pageId = this.$route.query.pageId
       const result = { components: [] }
       for (const componentId in this.componentsParams) {

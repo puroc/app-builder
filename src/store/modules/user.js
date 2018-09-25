@@ -132,7 +132,7 @@ const user = {
     },
     SwitchOrg({ commit }, orgId) {
       return new Promise((resolve, reject) => {
-        _getOrgInfo(orgId)
+        _getOrg(orgId)
           .then(response => {
             commit('SET_CURRENT_ORG', response.data.payloads[0])
             resolve()
